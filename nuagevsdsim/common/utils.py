@@ -37,13 +37,18 @@ import sys
 import uuid
 
 from vspk import v5_0 as vsdk
+from flask_restful import abort
 
-ROOT_UUIDS = {
-    'csproot_user': '',
-    'csp_enterprise': ''
+NUAGE_API_DATA = {
+    'ROOT_UUIDS': {
+        'csproot_user': '',
+        'csp_enterprise': ''
+    },
+    'USERS': {},
+    'ENTERPRISES': {},
+    'ENTERPRISE_USERS': {},
+    'USER_ENTERPRISE': {}
 }
-USERS = {}
-ENTERPRISES = {}
 
 def parse_config(config_file):
     """
@@ -72,34 +77,64 @@ def configure_logging(level, path):
 
     return logger
 
+def find_entities_by_field(data, field, value):
+    """
+    Find and return an aray of entities based on a field and value in a dict
+    Returns a dict (empty if no matching entities were found
+    """
+    result = []
+    if data and field and value and len(data) > 0 and hasattr(data.itervalues().next(), field):
+        result = list(v for k, v in data.iteritems() if getattr(v, field) == value)
+    return result
+
+def abort_check(data, field, value):
+    if len(find_entities_by_field(data=data, field=field, value=value)) == 0:
+        abort(404, message='Unable to find entity with field {0} and value {1}'.format(field, value))
+
 def init_base_entities():
     """
     Sets up basic entities for use
     """
-    global ROOT_UUIDS, USERS, ENTERPRISES
+    global NUAGE_API_DATA
 
-    _csproot = vsdk.NUUser(
-        id=str(uuid.uuid1()), user_name='csproot',
+    csproot = vsdk.NUUser(
+        id=str(uuid.uuid1()),
+        user_name='csproot',
+        password='csproot',
         first_name='csproot',
         last_name='csproot',
-        email = 'csproot@CSP.com'
+        email = 'csproot@CSP.com',
+        parent_type='ENTERPRISE'
     )
-    ROOT_UUIDS['csproot_user'] = _csproot.id
-    USERS[_csproot.id] = _csproot
-
-    _csp = vsdk.NUEnterprise(
+    csp = vsdk.NUEnterprise(
         id=str(uuid.uuid1()),
         name='CSP',
         description='Enterprise that contains all the CSP users',
-        customer_id=10002,
+        allowed_forwarding_classes=['E', 'F', 'G', 'H'],
+        allow_gateway_management=True,
+        allow_advanced_qos_configuration=True,
+        allow_trusted_forwarding_class=True,
+        bgp_enabled=True,
         creation_date=1383734246000,
-        last_updated_date=1499101329000,
-        last_updated_by=_csproot.id
+        customer_id=10002,
+        dictionary_version=2,
+        enable_application_performance_management=False,
+        entity_scope='ENTERPRISE',
+        floating_ips_quota=0,
+        floating_ips_used=0,
+        ldap_authorization_enabled=False,
+        ldap_enabled=False,
+        last_updated_by=csproot.id,
+        last_updated_date=1499101329000
     )
-    ROOT_UUIDS['csp_enterprise'] = _csp.id
-    ENTERPRISES[_csp.id] = _csp
+    csproot.parent_id = csp.id
+
+    NUAGE_API_DATA['ENTERPRISE_USERS'][csp.id] = [csproot.id]
+    NUAGE_API_DATA['USER_ENTERPRISE'][csproot.id] = [csp.id]
+    NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'] = csp.id
+    NUAGE_API_DATA['ENTERPRISES'][csp.id] = csp
+    NUAGE_API_DATA['ROOT_UUIDS']['csproot_user'] = csproot.id
+    NUAGE_API_DATA['USERS'][csproot.id] = csproot
 
     logging.info('Created base entities')
-    logging.debug('Root UUIDs: {0}'.format(ROOT_UUIDS))
-    logging.debug('Users: {0}'.format(USERS))
-    logging.debug('Enterprises: {0}'.format(ENTERPRISES))
+    logging.debug(NUAGE_API_DATA)

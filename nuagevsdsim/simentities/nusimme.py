@@ -34,41 +34,41 @@ import logging
 import uuid
 import time
 
-from vspk import v5_0 as vsdk
 from flask_restful import Resource
-from nuagevsdsim.common.utils import ROOT_UUIDS, USERS, ENTERPRISES
+from nuagevsdsim.common.utils import NUAGE_API_DATA
 
 
 class NUSimMe(Resource):
 
     def get(self):
+
         logging.debug('me get request received')
-        _result = [
+        result = [
             {
-                "userName": USERS[ROOT_UUIDS['csproot_user']].user_name,
+                "userName": NUAGE_API_DATA['USERS'][NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']].user_name,
                 "mobileNumber": None,
                 "flowCollectionEnabled": False,
                 "APIKey": str(uuid.uuid1()),
-                "firstName": USERS[ROOT_UUIDS['csproot_user']].first_name,
+                "firstName": NUAGE_API_DATA['USERS'][NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']].first_name,
                 "statisticsEnabled": False,
-                "APIKeyExpiry": int(time.time()+86400),
-                "lastName": USERS[ROOT_UUIDS['csproot_user']].last_name,
-                "enterpriseID": ROOT_UUIDS['csp_enterprise'],
-                "ID": ROOT_UUIDS['csproot_user'],
+                "APIKeyExpiry": int((time.time()+86400)*1000),
+                "lastName": NUAGE_API_DATA['USERS'][NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']].last_name,
+                "enterpriseID": NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'],
+                "ID": NUAGE_API_DATA['ROOT_UUIDS']['csproot_user'],
                 "entityScope": None,
                 "avatarType": None,
-                "enterpriseName": ENTERPRISES[ROOT_UUIDS['csp_enterprise']].name,
+                "enterpriseName": NUAGE_API_DATA['ENTERPRISES'][NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise']].name,
                 "role": "CSPROOT",
                 "statsTSDBServerAddress": None,
                 "avatarData": None,
                 "licenseCapabilities": [],
                 "externalId": None,
                 "password": None,
-                "email": USERS[ROOT_UUIDS['csproot_user']].email,
+                "email": NUAGE_API_DATA['USERS'][NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']].email,
                 "externalID": None
             }
         ]
-        return _result
+        return result
 
 
 
