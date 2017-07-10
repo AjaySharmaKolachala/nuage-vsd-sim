@@ -88,10 +88,16 @@ class NuageVSDSim(object):
         self.api = Api(self.app)
 
         self.api.add_resource(nusimme.NUSimMe, '/nuage/api/v5_0/me')
-        self.api.add_resource(nusimenterprise.NUSimEnterprises, '/nuage/api/v5_0/enterprises')
-        self.api.add_resource(nusimenterprise.NUSimEnterprise, '/nuage/api/v5_0/enterprises/<entity_id>')
-        self.api.add_resource(nusimuser.NUSimUsers, '/nuage/api/v5_0/users')
-        self.api.add_resource(nusimuser.NUSimUser, '/nuage/api/v5_0/users/<entity_id>')
+        self.api.add_resource(
+            nusimenterprise.NUSimEnterprise,
+            '/nuage/api/v5_0/enterprises',
+            '/nuage/api/v5_0/enterprises/<entity_id>')
+        self.api.add_resource(
+            nusimuser.NUSimUser,
+            '/nuage/api/v5_0/users',
+            '/nuage/api/v5_0/users/<entity_id>',
+            '/nuage/api/v5_0/enterprises/<parent_id>/users/<entity_id>'
+        )
 
         self.app.run(port=5000, debug=(log_level == 'DEBUG'))
 

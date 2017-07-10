@@ -46,6 +46,7 @@ class NUSimResource(Resource):
     __vspk_class__ = None
     __unique_fields__ = []
     __mandatory_fields__ = []
+    __default_fields__ = {}
 
     def __init__(self):
         pass
@@ -56,7 +57,7 @@ class NUSimResource(Resource):
         if entity_id:
             self._abort_missing_entity('id', entity_id)
             return [NUAGE_API_DATA[self.__vspk_class__.rest_name][entity_id].to_dict()]
-        elif entity_id == '':
+        else:
             if self.__vspk_class__ == vsdk.NUEnterprise:
                 return list(
                     i.to_dict() for k, i in NUAGE_API_DATA[self.__vspk_class__.rest_name].iteritems() if k != NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'])
@@ -128,9 +129,46 @@ class NUSimResource(Resource):
                 new_entity.customer_id = old_entity.customer_id
             if hasattr(new_entity, 'dictionary_version'):
                 new_entity.dictionary_version = 2
+            if hasattr(new_entity, 'parent_id'):
+                new_entity.parent_id = old_entity.parent_id
+                new_entity.parent_type = old_entity.parent_type
 
             NUAGE_API_DATA[self.__vspk_class__.rest_name][new_entity.id] = new_entity
             return [NUAGE_API_DATA[self.__vspk_class__.rest_name][new_entity.id].to_dict()], 201
+
+    def post(self, parent_id=None, entity_id=None):
+        logging.debug('{0:s} post request received'.format(self.__vspk_class__.rest_name))
+        logging.debug('args: {0}'.format(request.data))
+        data = json.loads(request.data)
+
+        for field in self.__mandatory_fields__:
+            self._abort_mandatory_field(data=data, field=field)
+        for field in self.__unique_fields__:
+            self._abort_duplicate_field(data=data, field=field)
+        for field, value in self.__default_fields__.iteritems():
+            if field not in data.keys() or not data[field]:
+                data[field] = value
+
+        data = self._parse_data(data)
+        logging.debug('data: {0}'.format(data))
+
+        entity = self.__vspk_class__(**data)
+        entity.id = str(uuid.uuid1())
+        if hasattr(entity, 'owner'):
+            entity.owner = NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']
+        if hasattr(entity, 'creation_date'):
+            entity.creation_date = int(time.time()*1000)
+        if hasattr(entity, 'last_updated_by'):
+            entity.last_updated_by = NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']
+        if hasattr(entity, 'last_updated_date'):
+            entity.last_updated_date = int(time.time()*1000)
+        if hasattr(entity, 'customer_id'):
+            entity.customer_id = 10000+random.randint(0,89999)
+        if hasattr(entity, 'dictionary_version'):
+            entity.dictionary_version = 2
+
+        NUAGE_API_DATA[self.__vspk_class__.rest_name][entity.id] = entity
+        return [NUAGE_API_DATA[self.__vspk_class__.rest_name][entity.id].to_dict()], 201
 
     def _find_entities_by_field(self, data, field, value):
         result = []
@@ -179,55 +217,3 @@ class NUSimResource(Resource):
         for key, value in data.iteritems():
             new_data[get_idiomatic_name(key)] = value
         return new_data
-
-class NUSimResources(NUSimResource):
-
-    __vspk_class__ = None
-    __unique_fields__ = []
-    __mandatory_fields__ = []
-    __default_fields__ = {}
-
-    def __init__(self):
-        super(NUSimResources, self).__init__()
-
-    def get(self, entity_id=None):
-        logging.debug('{0:s} list get request received'.format(self.__vspk_class__.rest_name))
-        if self.__vspk_class__ == vsdk.NUEnterprise:
-            return list(
-                i.to_dict() for k, i in NUAGE_API_DATA[self.__vspk_class__.rest_name].iteritems() if k != NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'])
-
-        return list(i.to_dict() for k, i in NUAGE_API_DATA[self.__vspk_class__.rest_name].iteritems())
-
-    def post(self):
-        logging.debug('{0:s} post request received'.format(self.__vspk_class__.rest_name))
-        logging.debug('args: {0}'.format(request.data))
-        data = json.loads(request.data)
-
-        for field in self.__mandatory_fields__:
-            self._abort_mandatory_field(data=data, field=field)
-        for field in self.__unique_fields__:
-            self._abort_duplicate_field(data=data, field=field)
-        for field, value in self.__default_fields__.iteritems():
-            if field not in data.keys() or not data[field]:
-                data[field] = value
-
-        data = self._parse_data(data)
-        logging.debug('data: {0}'.format(data))
-
-        entity = self.__vspk_class__(**data)
-        entity.id = str(uuid.uuid1())
-        if hasattr(entity, 'owner'):
-            entity.owner = NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']
-        if hasattr(entity, 'creation_date'):
-            entity.creation_date = int(time.time()*1000)
-        if hasattr(entity, 'last_updated_by'):
-            entity.last_updated_by = NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']
-        if hasattr(entity, 'last_updated_date'):
-            entity.last_updated_date = int(time.time()*1000)
-        if hasattr(entity, 'customer_id'):
-            entity.customer_id = 10000+random.randint(0,89999)
-        if hasattr(entity, 'dictionary_version'):
-            entity.dictionary_version = 2
-
-        NUAGE_API_DATA[self.__vspk_class__.rest_name][entity.id] = entity
-        return [NUAGE_API_DATA[self.__vspk_class__.rest_name][entity.id].to_dict()], 201

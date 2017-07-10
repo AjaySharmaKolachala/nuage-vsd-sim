@@ -31,20 +31,10 @@
 enterprise
 """
 from vspk import v5_0 as vsdk
-from nuagevsdsim.simentities.nusimresource import NUSimResource, NUSimResources
+from nuagevsdsim.simentities.nusimresource import NUSimResource
 
 
 class NUSimUser(NUSimResource):
-
-    __vspk_class__ = vsdk.NUUser
-    __unique_fields__ = ['userName']
-    __mandatory_fields__ = ['userName', 'password', 'email', 'firstName', 'lastName']
-
-    def __init__(self):
-        super(NUSimUser, self).__init__()
-
-
-class NUSimUsers(NUSimResources):
 
     __vspk_class__ = vsdk.NUUser
     __unique_fields__ = ['userName']
@@ -57,4 +47,4 @@ class NUSimUsers(NUSimResources):
     }
 
     def __init__(self):
-        super(NUSimUsers, self).__init__()
+        super(NUSimUser, self).__init__()
