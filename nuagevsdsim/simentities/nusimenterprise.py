@@ -49,6 +49,8 @@ class NUSimEnterprise(NUSimResource):
         'LDAPEnabled': False,
         'allowedForwardingClasses': ['H']
     }
+    __get_parents__ = ['me']
+    __create_parents__ = ['me']
 
     def __init__(self):
         super(NUSimEnterprise, self).__init__()

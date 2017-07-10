@@ -45,6 +45,8 @@ class NUSimUser(NUSimResource):
         'entityScope': 'ENTERPRISE',
         'parentType': 'enterprise'
     }
+    __get_parents__ = ['me', 'enterprise']
+    __create_parents__ = ['enterprise']
 
     def __init__(self):
         super(NUSimUser, self).__init__()

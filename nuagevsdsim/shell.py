@@ -96,7 +96,8 @@ class NuageVSDSim(object):
             nusimuser.NUSimUser,
             '/nuage/api/v5_0/users',
             '/nuage/api/v5_0/users/<entity_id>',
-            '/nuage/api/v5_0/enterprises/<parent_id>/users/<entity_id>'
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/users',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/users/<entity_id>'
         )
 
         self.app.run(port=5000, debug=(log_level == 'DEBUG'))

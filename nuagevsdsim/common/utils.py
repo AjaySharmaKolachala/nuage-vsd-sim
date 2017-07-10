@@ -46,9 +46,18 @@ NUAGE_API_DATA = {
     },
     'user': {},
     'enterprise': {},
-    'enterprise_user': {},
-    'user_enterprise': {}
+    'enterprise_user': {}
 }
+
+INVARIANT_RESOURCES = [
+    'brconnections',
+    'cms',
+    'licensestatus',
+    'ltestatistics',
+    'qos',
+    'statistics',
+    'vrsmetrics'
+]
 
 def parse_config(config_file):
     """
@@ -66,34 +75,6 @@ def parse_config(config_file):
         sys.exit(1)
 
     return cfg
-
-def _string_clean(string):
-    """
-    """
-    rep = {
-        "IPID": "IpID",
-        "VCenter": "Vcenter",
-        "vCenter": "Vcenter",
-        "VPort": "Vport",
-        "IPv6": "Ipv6",
-        "IPv4": "Ipv4"
-    }
-
-    rep = dict((re.escape(k), v) for k, v in rep.items())
-    pattern = re.compile("|".join(list(rep.keys())))
-
-    return pattern.sub(lambda m: rep[re.escape(m.group(0))], string)
-
-
-def get_idiomatic_name(name):
-    """
-    """
-    first_cap_re = re.compile("(.)([A-Z](?!s([A-Z])*)[a-z]+)")
-    all_cap_re = re.compile("([a-z0-9])([A-Z])")
-
-    s1 = first_cap_re.sub(r"\1_\2", _string_clean(name))
-
-    return all_cap_re.sub(r"\1_\2", s1).lower()
 
 def configure_logging(level, path):
     """
@@ -142,8 +123,7 @@ def init_base_entities():
     )
     csproot.parent_id = csp.id
 
-    NUAGE_API_DATA['enterprise_user'][csp.id] = [csproot.id]
-    NUAGE_API_DATA['user_enterprise'][csproot.id] = [csp.id]
+    NUAGE_API_DATA['enterprise_user'][csp.id] = {csproot.id: csproot}
     NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'] = csp.id
     NUAGE_API_DATA['enterprise'][csp.id] = csp
     NUAGE_API_DATA['ROOT_UUIDS']['csproot_user'] = csproot.id
@@ -151,3 +131,37 @@ def init_base_entities():
 
     logging.info('Created base entities')
     logging.debug(NUAGE_API_DATA)
+
+def _string_clean(string):
+    rep = {
+        "IPID": "IpID",
+        "VCenter": "Vcenter",
+        "vCenter": "Vcenter",
+        "VPort": "Vport",
+        "IPv6": "Ipv6",
+        "IPv4": "Ipv4"
+    }
+
+    rep = dict((re.escape(k), v) for k, v in rep.items())
+    pattern = re.compile("|".join(list(rep.keys())))
+
+    return pattern.sub(lambda m: rep[re.escape(m.group(0))], string)
+
+
+def get_idiomatic_name(name):
+    first_cap_re = re.compile("(.)([A-Z](?!s([A-Z])*)[a-z]+)")
+    all_cap_re = re.compile("([a-z0-9])([A-Z])")
+
+    s1 = first_cap_re.sub(r"\1_\2", _string_clean(name))
+
+    return all_cap_re.sub(r"\1_\2", s1).lower()
+
+def get_singular_name(plural_name):
+    if plural_name in INVARIANT_RESOURCES:
+        return plural_name
+
+    if plural_name[-3:] == 'ies':
+        return plural_name[:-3] + 'y'
+
+    if plural_name[-1:] == 's':
+        return plural_name[:-1]

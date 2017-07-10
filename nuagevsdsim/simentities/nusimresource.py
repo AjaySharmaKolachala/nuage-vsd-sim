@@ -38,7 +38,7 @@ import uuid
 
 from vspk import v5_0 as vsdk
 from flask_restful import Resource, request, abort
-from nuagevsdsim.common.utils import NUAGE_API_DATA, get_idiomatic_name
+from nuagevsdsim.common.utils import NUAGE_API_DATA, get_idiomatic_name, get_singular_name
 
 
 class NUSimResource(Resource):
@@ -47,16 +47,28 @@ class NUSimResource(Resource):
     __unique_fields__ = []
     __mandatory_fields__ = []
     __default_fields__ = {}
+    __get_parents__ = []
+    __create_parents__ = []
 
     def __init__(self):
         pass
 
-    def get(self, entity_id=None):
+    def get(self, parent_type=None, parent_id=None, entity_id=None):
         logging.debug('{0:s} get request received'.format(self.__vspk_class__.rest_name))
+
+        if parent_type:
+            parent_type = get_singular_name(parent_type)
 
         if entity_id:
             self._abort_missing_entity('id', entity_id)
             return [NUAGE_API_DATA[self.__vspk_class__.rest_name][entity_id].to_dict()]
+        elif parent_type and parent_id:
+            self._abort_get_wrong_parent(parent_type=parent_type, parent_id=parent_id)
+            result = []
+            if parent_id in NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)].keys():
+                for key, entity in NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)][parent_id].iteritems():
+                    result.append(entity.to_dict())
+            return result
         else:
             if self.__vspk_class__ == vsdk.NUEnterprise:
                 return list(
@@ -132,13 +144,20 @@ class NUSimResource(Resource):
             if hasattr(new_entity, 'parent_id'):
                 new_entity.parent_id = old_entity.parent_id
                 new_entity.parent_type = old_entity.parent_type
+            del old_entity
 
             NUAGE_API_DATA[self.__vspk_class__.rest_name][new_entity.id] = new_entity
+            if new_entity.parent_id and new_entity.parent_type:
+                NUAGE_API_DATA['{0:s}_{1:s}'.format(new_entity.parent_type, self.__vspk_class__.rest_name)][new_entity.parent_id][new_entity.id] = new_entity
             return [NUAGE_API_DATA[self.__vspk_class__.rest_name][new_entity.id].to_dict()], 201
 
-    def post(self, parent_id=None, entity_id=None):
+    def post(self, parent_type=None, parent_id=None, entity_id=None):
         logging.debug('{0:s} post request received'.format(self.__vspk_class__.rest_name))
         logging.debug('args: {0}'.format(request.data))
+
+        if parent_type:
+            parent_type = get_singular_name(parent_type)
+
         data = json.loads(request.data)
 
         for field in self.__mandatory_fields__:
@@ -167,7 +186,31 @@ class NUSimResource(Resource):
         if hasattr(entity, 'dictionary_version'):
             entity.dictionary_version = 2
 
+        if parent_type and parent_id:
+            self._abort_post_wrong_parent(parent_type=parent_type, parent_id=parent_id)
+            if hasattr(entity, 'parent_type'):
+                entity.parent_type = parent_type
+                entity.parent_id = parent_id
+        elif 'me' not in self.__create_parents__:
+            return_data = {
+                'errors': [{
+                    'property': '',
+                    'descriptions': [
+                        {
+                            'description': 'Entity {0:s} can not be created on the root level'.format(self.__vspk_class__.rest_name),
+                            'title': 'Invalid parent'
+                        }
+                    ]
+                }]
+            }
+            abort(409, **return_data)
+
         NUAGE_API_DATA[self.__vspk_class__.rest_name][entity.id] = entity
+        if parent_id and parent_type:
+            if parent_id in NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)].keys():
+                NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)][parent_id][entity.id] = entity
+            else:
+                NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)][parent_id] = {entity.id: entity}
         return [NUAGE_API_DATA[self.__vspk_class__.rest_name][entity.id].to_dict()], 201
 
     def _find_entities_by_field(self, data, field, value):
@@ -211,6 +254,62 @@ class NUSimResource(Resource):
     def _abort_missing_entity(self, field, value):
         if len(self._find_entities_by_field(data=NUAGE_API_DATA[self.__vspk_class__.rest_name], field=field, value=value)) == 0:
             abort(404, message='Unable to find entity with field {0} and value {1}'.format(field, value))
+
+    def _abort_get_wrong_parent(self, parent_type, parent_id):
+        if parent_type not in self.__get_parents__:
+            return_data = {
+                'errors': [{
+                    'property': '',
+                    'descriptions': [
+                        {
+                            'description': 'Invalid get parent type {0:s} for a {1:s}'.format(parent_type, self.__vspk_class__.rest_name),
+                            'title': 'Invalid parent'
+                        }
+                    ]
+                }]
+            }
+            abort(409, **return_data)
+        elif parent_id not in NUAGE_API_DATA[parent_type].keys():
+            return_data = {
+                'errors': [{
+                    'property': '',
+                    'descriptions': [
+                        {
+                            'description': 'Parent {0:s} with ID {1:s} does not exist'.format(parent_type, parent_id),
+                            'title': 'Invalid parent'
+                        }
+                    ]
+                }]
+            }
+            abort(409, **return_data)
+
+    def _abort_post_wrong_parent(self, parent_type, parent_id):
+        if parent_type not in self.__create_parents__:
+            return_data = {
+                'errors': [{
+                    'property': '',
+                    'descriptions': [
+                        {
+                            'description': 'Invalid post parent type {0:s} for a {1:s}'.format(parent_type, self.__vspk_class__.rest_name),
+                            'title': 'Invalid parent'
+                        }
+                    ]
+                }]
+            }
+            abort(409, **return_data)
+        elif parent_id not in NUAGE_API_DATA[parent_type].keys():
+            return_data = {
+                'errors': [{
+                    'property': '',
+                    'descriptions': [
+                        {
+                            'description': 'Parent {0:s} with ID {1:s} does not exist'.format(parent_type, parent_id),
+                            'title': 'Invalid parent'
+                        }
+                    ]
+                }]
+            }
+            abort(409, **return_data)
 
     def _parse_data(self, data=dict()):
         new_data = {}
