@@ -34,31 +34,27 @@ from vspk import v5_0 as vsdk
 from nuagevsdsim.simentities.nusimresource import NUSimResource, NUSimResources
 
 
-class NUSimEnterprise(NUSimResource):
+class NUSimUser(NUSimResource):
 
-    __vspk_class__ = vsdk.NUEnterprise
-    __unique_fields__ = ['name']
-    __mandatory_fields__ = ['name']
+    __vspk_class__ = vsdk.NUUser
+    __unique_fields__ = ['userName']
+    __mandatory_fields__ = ['userName', 'password', 'email', 'firstName', 'lastName']
 
     def __init__(self):
-        super(NUSimEnterprise, self).__init__()
+        super(NUSimUser, self).__init__()
 
 
-class NUSimEnterprises(NUSimResources):
+class NUSimUsers(NUSimResources):
 
-    __vspk_class__ = vsdk.NUEnterprise
-    __unique_fields__ = ['name']
-    __mandatory_fields__ = ['name']
+    __vspk_class__ = vsdk.NUUser
+    __unique_fields__ = ['userName']
+    __mandatory_fields__ = ['userName', 'password', 'email', 'firstName', 'lastName']
     __default_fields__ = {
-        'BGPEnabled': False,
-        'DHCPLeaseInterval': 24,
+        'managedMode': "DEFAULT",
+        'disabled': False,
         'entityScope': 'ENTERPRISE',
-        'floatingIPsQuota': 24,
-        'floatingIPsUsed': 0,
-        'LDAPAuthorizationEnabled': False,
-        'LDAPEnabled': False,
-        'allowedForwardingClasses': ['H']
+        'parentType': 'enterprise'
     }
 
     def __init__(self):
-        super(NUSimEnterprises, self).__init__()
+        super(NUSimUsers, self).__init__()

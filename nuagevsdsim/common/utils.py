@@ -35,19 +35,19 @@ import ConfigParser
 import logging
 import sys
 import uuid
+import re
 
 from vspk import v5_0 as vsdk
-from flask_restful import abort
 
 NUAGE_API_DATA = {
     'ROOT_UUIDS': {
         'csproot_user': '',
         'csp_enterprise': ''
     },
-    'USERS': {},
-    'ENTERPRISES': {},
-    'ENTERPRISE_USERS': {},
-    'USER_ENTERPRISE': {}
+    'user': {},
+    'enterprise': {},
+    'enterprise_user': {},
+    'user_enterprise': {}
 }
 
 def parse_config(config_file):
@@ -67,6 +67,33 @@ def parse_config(config_file):
 
     return cfg
 
+def _string_clean(string):
+    """
+    """
+    rep = {
+        "IPID": "IpID",
+        "VCenter": "Vcenter",
+        "vCenter": "Vcenter",
+        "VPort": "Vport",
+        "IPv6": "Ipv6",
+        "IPv4": "Ipv4"
+    }
+
+    rep = dict((re.escape(k), v) for k, v in rep.items())
+    pattern = re.compile("|".join(list(rep.keys())))
+
+    return pattern.sub(lambda m: rep[re.escape(m.group(0))], string)
+
+
+def get_idiomatic_name(name):
+    """
+    """
+    first_cap_re = re.compile("(.)([A-Z](?!s([A-Z])*)[a-z]+)")
+    all_cap_re = re.compile("([a-z0-9])([A-Z])")
+
+    s1 = first_cap_re.sub(r"\1_\2", _string_clean(name))
+
+    return all_cap_re.sub(r"\1_\2", s1).lower()
 
 def configure_logging(level, path):
     """
@@ -76,20 +103,6 @@ def configure_logging(level, path):
     logger = logging.getLogger(__name__)
 
     return logger
-
-def find_entities_by_field(data, field, value):
-    """
-    Find and return an aray of entities based on a field and value in a dict
-    Returns a dict (empty if no matching entities were found
-    """
-    result = []
-    if data and field and value and len(data) > 0 and hasattr(data.itervalues().next(), field):
-        result = list(v for k, v in data.iteritems() if getattr(v, field) == value)
-    return result
-
-def abort_check(data, field, value):
-    if len(find_entities_by_field(data=data, field=field, value=value)) == 0:
-        abort(404, message='Unable to find entity with field {0} and value {1}'.format(field, value))
 
 def init_base_entities():
     """
@@ -129,12 +142,12 @@ def init_base_entities():
     )
     csproot.parent_id = csp.id
 
-    NUAGE_API_DATA['ENTERPRISE_USERS'][csp.id] = [csproot.id]
-    NUAGE_API_DATA['USER_ENTERPRISE'][csproot.id] = [csp.id]
+    NUAGE_API_DATA['enterprise_user'][csp.id] = [csproot.id]
+    NUAGE_API_DATA['user_enterprise'][csproot.id] = [csp.id]
     NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'] = csp.id
-    NUAGE_API_DATA['ENTERPRISES'][csp.id] = csp
+    NUAGE_API_DATA['enterprise'][csp.id] = csp
     NUAGE_API_DATA['ROOT_UUIDS']['csproot_user'] = csproot.id
-    NUAGE_API_DATA['USERS'][csproot.id] = csproot
+    NUAGE_API_DATA['user'][csproot.id] = csproot
 
     logging.info('Created base entities')
     logging.debug(NUAGE_API_DATA)
