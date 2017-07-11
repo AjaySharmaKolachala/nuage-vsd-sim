@@ -37,7 +37,7 @@ setup(
     name='nuage-vsd-sim',
     version='1.0.0b1',
     description='A sample Nuage VSD API simulator',
-    url='http://github.com/pdellaert/vspk-sim',
+    url='http://github.com/pdellaert/nuage-vsd-sim',
     author='Philippe Dellaert',
     author_email='philippe@dellaert.org',
     license='BSD 3-Clause',
