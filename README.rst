@@ -10,7 +10,7 @@ Once you created your virtual environment, run the following command
 
 .. code-block::
 
-    $ pip install git+https://github.com/pdellaert/vspk-sim``
+    $ pip install git+https://github.com/pdellaert/vspk-sim
 
 Configuration
 -------------
