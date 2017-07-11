@@ -35,7 +35,7 @@ except ImportError:
 
 setup(
     name='nuage-vsd-sim',
-    version='0.1.0',
+    version='1.0.0b1',
     description='A sample Nuage VSD API simulator',
     url='http://github.com/pdellaert/vspk-sim',
     author='Philippe Dellaert',
@@ -56,6 +56,7 @@ setup(
         'Topic :: System :: Systems Administration',
         'Topic :: Utilities'
     ),
+    keywords='Nuage VSD API simulator',
     packages=[
         'nuagevsdsim',
         'nuagevsdsim.common',
@@ -65,6 +66,7 @@ setup(
         'vspk>=5.0.0',
         'flask-restful'
     ],
+    python_requires='>=2.6, <3',
     entry_points={
         'console_scripts': [
             'nuage-vsd-sim = nuagevsdsim.shell:main'
