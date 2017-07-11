@@ -30,13 +30,13 @@
 """
 enterprise
 """
-import logging
 import json
+import logging
 import random
+import re
 import time
 import uuid
 
-from vspk import v5_0 as vsdk
 from flask_restful import Resource, request, abort
 from nuagevsdsim.common.utils import NUAGE_API_DATA, get_idiomatic_name, get_singular_name
 
@@ -59,21 +59,32 @@ class NUSimResource(Resource):
         if parent_type:
             parent_type = get_singular_name(parent_type)
 
+        headers = self._parse_nuage_headers(headers=request.headers)
+        filter = self._parse_filter(filter=headers['X-Nuage-Filter'])
+
+        result = []
         if entity_id:
             self._abort_missing_entity('id', entity_id)
-            return [NUAGE_API_DATA[self.__vspk_class__.rest_name][entity_id].to_dict()]
+            result.append(NUAGE_API_DATA[self.__vspk_class__.rest_name][entity_id].to_dict())
+
         elif parent_type and parent_id:
             self._abort_get_wrong_parent(parent_type=parent_type, parent_id=parent_id)
-            result = []
             if parent_id in NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)].keys():
                 for key, entity in NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)][parent_id].iteritems():
-                    result.append(entity.to_dict())
-            return result
+                    if filter is None or (filter and hasattr(entity, filter[0]) and filter[1] == getattr(entity, filter[0])):
+                        result.append(entity.to_dict())
+                        if headers['X-Nuage-Page'] == '0' and headers['X-Nuage-PageSize'] == '1':
+                            break
+
         else:
-            if self.__vspk_class__ == vsdk.NUEnterprise:
-                return list(
-                    i.to_dict() for k, i in NUAGE_API_DATA[self.__vspk_class__.rest_name].iteritems() if k != NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'])
-            return list(i.to_dict() for k, i in NUAGE_API_DATA[self.__vspk_class__.rest_name].iteritems())
+            for key, entity in NUAGE_API_DATA[self.__vspk_class__.rest_name].iteritems():
+                if key != NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'] and (filter is None or (filter and hasattr(entity, filter[0]) and filter[1] == getattr(entity, filter[0]))):
+                    result.append(entity.to_dict())
+                    if headers['X-Nuage-Page'] == '0' and headers['X-Nuage-PageSize'] == '1':
+                        break
+
+        headers['X-Nuage-Count'] = len(result)
+        return result, 200, self._build_response_headers(request_headers=headers)
 
     def delete(self, entity_id=None):
         logging.debug('{0:s} delete request received'.format(self.__vspk_class__.rest_name))
@@ -109,16 +120,20 @@ class NUSimResource(Resource):
             abort(409, **return_data)
 
         self._abort_missing_entity('id', entity_id)
+
         if entity_id:
             del NUAGE_API_DATA[self.__vspk_class__.rest_name][entity_id]
         return '', 204
 
-    def put(self, entity_id=None):
+    def put(self, parent_type=None, parent_id=None, entity_id=None):
         logging.debug('{0:s} put request received'.format(self.__vspk_class__.rest_name))
         logging.debug('args: {0}'.format(request.data))
-        self._abort_missing_entity('id', entity_id)
+
+        if parent_type:
+            parent_type = get_singular_name(parent_type)
 
         if entity_id:
+            self._abort_missing_entity('id', entity_id)
             data = json.loads(request.data)
 
             for field in self.__mandatory_fields__:
@@ -151,6 +166,19 @@ class NUSimResource(Resource):
                 NUAGE_API_DATA['{0:s}_{1:s}'.format(new_entity.parent_type, self.__vspk_class__.rest_name)][new_entity.parent_id][new_entity.id] = new_entity
             return [NUAGE_API_DATA[self.__vspk_class__.rest_name][new_entity.id].to_dict()], 201
 
+        elif parent_type and parent_id:
+            self._abort_get_wrong_parent(parent_type=parent_type, parent_id=parent_id)
+
+            members = {}
+            data = json.loads(request.data)
+            if len(data) > 0:
+                for member_id in data:
+                    self._abort_missing_entity('id', member_id)
+                    members[member_id] = NUAGE_API_DATA[self.__vspk_class__.rest_name][member_id]
+            NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)][parent_id] = members
+            return None, 204
+
+
     def post(self, parent_type=None, parent_id=None, entity_id=None):
         logging.debug('{0:s} post request received'.format(self.__vspk_class__.rest_name))
         logging.debug('args: {0}'.format(request.data))
@@ -169,7 +197,6 @@ class NUSimResource(Resource):
                 data[field] = value
 
         data = self._parse_data(data)
-        logging.debug('data: {0}'.format(data))
 
         entity = self.__vspk_class__(**data)
         entity.id = str(uuid.uuid1())
@@ -311,8 +338,42 @@ class NUSimResource(Resource):
             }
             abort(409, **return_data)
 
+    def _build_response_headers(self, request_headers=dict()):
+        result = {}
+        for header, value in request_headers.iteritems():
+            if value is not None:
+                result[header] = value
+        return result
+
     def _parse_data(self, data=dict()):
         new_data = {}
         for key, value in data.iteritems():
             new_data[get_idiomatic_name(key)] = value
         return new_data
+
+    def _parse_nuage_headers(self, headers=dict()):
+        result = {
+            'X-Nuage-Organization': 'csp',
+            'X-Nuage-Page': None,
+            'X-Nuage-PageSize': None,
+            'X-Nuage-OrderBy': None,
+            'X-Nuage-FilterType': None,
+            'X-Nuage-Filter': None,
+            'X-Nuage-Count': None,
+            'X-Nuage-Custom': None,
+            'X-Nuage-ClientType': None,
+            'Access-Control-Expose-Headers': 'X-Nuage-Organization, X-Nuage-ProxyUser, X-Nuage-OrderBy, X-Nuage-FilterType, X-Nuage-Filter, X-Nuage-Page, X-Nuage-PageSize, X-Nuage-Count, X-Nuage-Custom, X-Nuage-ClientType'
+        }
+
+        lower_headers = {k.lower(): v for k, v in headers.iteritems()}
+        for header in result.keys():
+            if header.lower() in lower_headers.keys():
+                result[header] = lower_headers[header.lower()]
+        return result
+
+    def _parse_filter(self, filter):
+        if filter:
+            reg = re.search('[\'"]?([\w]*)[\'"]?\s*==\s*[\'"]?([\w\s-]*)[\'"]?', filter)
+            if len(reg.groups()) == 2:
+                return reg.groups()
+        return None

@@ -27,13 +27,26 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-import os
-import glob
+"""
+enterprise
+"""
+from vspk import v5_0 as vsdk
+from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-modules = glob.glob('{0:s}/*.py'.format(os.path.dirname(__file__)))
-__all__ = [os.path.basename(f)[:-3] for f in modules]
 
-from .nusimenterprise import NUSimEnterprise
-from .nusimgroup import NUSimGroup
-from .nusimuser import NUSimUser
-from .nusimme import NUSimMe
+class NUSimGroup(NUSimResource):
+
+    __vspk_class__ = vsdk.NUGroup
+    __unique_fields__ = []
+    __mandatory_fields__ = ['name']
+    __default_fields__ = {
+        'accountRestrictions': False,
+        'managementMode': 'DEFAULT',
+        'private': False,
+        'role': "ORGUSER"
+    }
+    __get_parents__ = ['enterprise']
+    __create_parents__ = ['enterprise']
+
+    def __init__(self):
+        super(NUSimGroup, self).__init__()

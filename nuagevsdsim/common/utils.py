@@ -44,9 +44,12 @@ NUAGE_API_DATA = {
         'csproot_user': '',
         'csp_enterprise': ''
     },
-    'user': {},
     'enterprise': {},
-    'enterprise_user': {}
+    'enterprise_user': {},
+    'enterprise_group': {},
+    'group': {},
+    'group_user':{},
+    'user': {},
 }
 
 INVARIANT_RESOURCES = [

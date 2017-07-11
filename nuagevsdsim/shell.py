@@ -36,7 +36,7 @@ A sample Nuage VSD API simulator
 import argparse
 import os
 
-from nuagevsdsim.simentities import *
+from nuagevsdsim import simentities as sim
 from nuagevsdsim.common import utils
 from flask import Flask
 from flask_restful import Api
@@ -87,17 +87,25 @@ class NuageVSDSim(object):
 
         self.api = Api(self.app)
 
-        self.api.add_resource(nusimme.NUSimMe, '/nuage/api/v5_0/me')
         self.api.add_resource(
-            nusimenterprise.NUSimEnterprise,
+            sim.NUSimMe,
+            '/nuage/api/v5_0/me'
+        )
+        self.api.add_resource(
+            sim.NUSimEnterprise,
             '/nuage/api/v5_0/enterprises',
-            '/nuage/api/v5_0/enterprises/<entity_id>')
+            '/nuage/api/v5_0/enterprises/<entity_id>'
+        )
         self.api.add_resource(
-            nusimuser.NUSimUser,
+            sim.NUSimUser,
             '/nuage/api/v5_0/users',
             '/nuage/api/v5_0/users/<entity_id>',
-            '/nuage/api/v5_0/<parent_type>/<parent_id>/users',
-            '/nuage/api/v5_0/<parent_type>/<parent_id>/users/<entity_id>'
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/users'
+        )
+        self.api.add_resource(
+            sim.NUSimGroup,
+            '/nuage/api/v5_0/groups/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/groups'
         )
 
         self.app.run(port=5000, debug=(log_level == 'DEBUG'))
