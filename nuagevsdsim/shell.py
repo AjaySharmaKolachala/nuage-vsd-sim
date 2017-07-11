@@ -36,10 +36,11 @@ A sample Nuage VSD API simulator
 import argparse
 import os
 
-from nuagevsdsim import simentities as sim
-from nuagevsdsim.common import utils
 from flask import Flask
 from flask_restful import Api
+
+from nuagevsdsim import simentities as sim
+from nuagevsdsim.common import utils
 
 
 class NuageVSDSim(object):

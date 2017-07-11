@@ -31,17 +31,17 @@
 me
 """
 import logging
-import uuid
 import time
+import uuid
 
 from flask_restful import Resource
+
 from nuagevsdsim.common.utils import NUAGE_API_DATA
 
 
 class NUSimMe(Resource):
-
-    def get(self):
-
+    @staticmethod
+    def get():
         logging.debug('me get request received')
         result = [
             {
@@ -51,7 +51,7 @@ class NUSimMe(Resource):
                 "APIKey": str(uuid.uuid1()),
                 "firstName": NUAGE_API_DATA['user'][NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']].first_name,
                 "statisticsEnabled": False,
-                "APIKeyExpiry": int((time.time()+86400)*1000),
+                "APIKeyExpiry": int((time.time() + 86400) * 1000),
                 "lastName": NUAGE_API_DATA['user'][NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']].last_name,
                 "enterpriseID": NUAGE_API_DATA['ROOT_UUIDS']['csp_enterprise'],
                 "ID": NUAGE_API_DATA['ROOT_UUIDS']['csproot_user'],
@@ -69,6 +69,3 @@ class NUSimMe(Resource):
             }
         ]
         return result
-
-
-

@@ -31,11 +31,11 @@
 enterprise
 """
 from vspk import v5_0 as vsdk
+
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
 
 class NUSimEnterprise(NUSimResource):
-
     __vspk_class__ = vsdk.NUEnterprise
     __unique_fields__ = ['name']
     __mandatory_fields__ = ['name']

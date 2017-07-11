@@ -33,9 +33,9 @@ Nuage VSD Sim utils
 
 import ConfigParser
 import logging
+import re
 import sys
 import uuid
-import re
 
 from vspk import v5_0 as vsdk
 
@@ -48,7 +48,7 @@ NUAGE_API_DATA = {
     'enterprise_user': {},
     'enterprise_group': {},
     'group': {},
-    'group_user':{},
+    'group_user': {},
     'user': {},
 }
 
@@ -62,6 +62,7 @@ INVARIANT_RESOURCES = [
     'vrsmetrics'
 ]
 
+
 def parse_config(config_file):
     """
     Parses configuration file
@@ -73,11 +74,11 @@ def parse_config(config_file):
     if not cfg.has_option('LOG', 'directory') or \
             not cfg.has_option('LOG', 'file') or \
             not cfg.has_option('LOG', 'level'):
-        print 'Missing options in the LOG section of configuration file {0:s}, please check the sample configuration'.format(
-            config_file)
+        print 'Missing options in the LOG section of configuration file {0:s}, please check the sample configuration'.format(config_file)
         sys.exit(1)
 
     return cfg
+
 
 def configure_logging(level, path):
     """
@@ -87,6 +88,7 @@ def configure_logging(level, path):
     logger = logging.getLogger(__name__)
 
     return logger
+
 
 def init_base_entities():
     """
@@ -100,7 +102,7 @@ def init_base_entities():
         password='csproot',
         first_name='csproot',
         last_name='csproot',
-        email = 'csproot@CSP.com',
+        email='csproot@CSP.com',
         parent_type='ENTERPRISE'
     )
     csp = vsdk.NUEnterprise(
@@ -135,6 +137,7 @@ def init_base_entities():
     logging.info('Created base entities')
     logging.debug(NUAGE_API_DATA)
 
+
 def _string_clean(string):
     rep = {
         "IPID": "IpID",
@@ -158,6 +161,7 @@ def get_idiomatic_name(name):
     s1 = first_cap_re.sub(r"\1_\2", _string_clean(name))
 
     return all_cap_re.sub(r"\1_\2", s1).lower()
+
 
 def get_singular_name(plural_name):
     if plural_name in INVARIANT_RESOURCES:

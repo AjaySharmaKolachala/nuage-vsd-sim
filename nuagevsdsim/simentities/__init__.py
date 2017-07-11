@@ -27,13 +27,14 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-import os
 import glob
+import os
 
-modules = glob.glob('{0:s}/*.py'.format(os.path.dirname(__file__)))
-__all__ = [os.path.basename(f)[:-3] for f in modules]
-
+from .nusimresource import NUSimResource
 from .nusimenterprise import NUSimEnterprise
 from .nusimgroup import NUSimGroup
 from .nusimuser import NUSimUser
 from .nusimme import NUSimMe
+
+modules = glob.glob('{0:s}/*.py'.format(os.path.dirname(__file__)))
+__all__ = [os.path.basename(f)[:-3] for f in modules]
