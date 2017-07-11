@@ -43,9 +43,10 @@ $ nuage-vsd-sim
 * Users
 
 ### Limitations
-* You can use any user information, you will always log in as csproot
-* Filter can only contain a single field, exact filter, like 'name == "Something"'
-* No advanced backend functionality is mimicked: If you create an entity, it will not automatically do the same things it would in a real VSD
+
+* You can use any user information, you will always log in as csproot.
+* Filter can only contain a single field and an exact filter, for instance `'name == "Something"'`.
+* No advanced backend functionality is mimicked: If you create an entity, it will not automatically do the same things it would in a real VSD.
 
   Example: Creating an Enterprise will not automatically create the Administrator (or other) groups
 
