@@ -35,6 +35,7 @@ from .nusimenterprise import NUSimEnterprise
 from .nusimgroup import NUSimGroup
 from .nusimuser import NUSimUser
 from .nusimme import NUSimMe
+from .nusimroot import NUSimRoot
 
 modules = glob.glob('{0:s}/*.py'.format(os.path.dirname(__file__)))
 __all__ = [os.path.basename(f)[:-3] for f in modules]

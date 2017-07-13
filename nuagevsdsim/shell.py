@@ -40,7 +40,7 @@ from flask import Flask
 from flask_restful import Api
 
 from nuagevsdsim import simentities as sim
-from nuagevsdsim.common import utils
+from nuagevsdsim.common import NUSimConfig, utils
 
 
 class NuageVSDSim(object):
@@ -86,7 +86,17 @@ class NuageVSDSim(object):
 
         self.app = Flask(__name__)
 
+        self.app.config.from_object(NUSimConfig)
+
         self.api = Api(self.app)
+
+        self.api.add_resource(
+            sim.NUSimRoot,
+            '/',
+            '/nuage',
+            '/nuage/api',
+            '/nuage/api/v5_0'
+        )
 
         self.api.add_resource(
             sim.NUSimMe,

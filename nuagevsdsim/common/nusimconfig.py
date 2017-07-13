@@ -27,49 +27,19 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
+Nuage VSD Sim Config
+"""
+import json
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from bambou import NURESTObject
 
-setup(
-    name='nuage-vsd-sim',
-    version='1.0.0b3',
-    description='A sample Nuage VSD API simulator',
-    url='http://github.com/pdellaert/nuage-vsd-sim',
-    author='Philippe Dellaert',
-    author_email='philippe@dellaert.org',
-    license='BSD 3-Clause',
-    classifiers=(
-        'Development Status :: 4 - Beta',
-        'Environment :: Console',
-        'Intended Audience :: Information Technology',
-        'Intended Audience :: System Administrators',
-        'License :: OSI Approved :: BSD License',
-        'Natural Language :: English',
-        'Operating System :: MacOS',
-        'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: System :: Networking',
-        'Topic :: System :: Systems Administration',
-        'Topic :: Utilities'
-    ),
-    keywords='Nuage VSD API simulator',
-    packages=[
-        'nuagevsdsim',
-        'nuagevsdsim.common',
-        'nuagevsdsim.simentities',
-    ],
-    install_requires=[
-        'vspk>=5.0.0',
-        'flask-restful'
-    ],
-    python_requires='>=2.6, <3',
-    entry_points={
-        'console_scripts': [
-            'nuage-vsd-sim = nuagevsdsim.shell:main'
-        ]
-    }
-)
+
+class NUSimEntityEncoder(json.JSONEncoder):
+    def default(self, o):
+        if issubclass(type(o), NURESTObject):
+            return o.to_dict()
+
+
+class NUSimConfig(object):
+    RESTFUL_JSON = {'cls': NUSimEntityEncoder}
