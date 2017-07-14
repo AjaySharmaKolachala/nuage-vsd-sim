@@ -35,7 +35,7 @@ except ImportError:
 
 setup(
     name='nuage-vsd-sim',
-    version='1.0.0b3',
+    version='1.0.0b4',
     description='A sample Nuage VSD API simulator',
     url='http://github.com/pdellaert/nuage-vsd-sim',
     author='Philippe Dellaert',
