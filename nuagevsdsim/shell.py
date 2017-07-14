@@ -34,6 +34,7 @@ A sample Nuage VSD API simulator
 """
 
 import argparse
+import ConfigParser
 import os
 
 from flask import Flask
@@ -65,7 +66,11 @@ class NuageVSDSim(object):
         elif os.path.isfile('/etc/nuage-vsd-sim/config.ini'):
             cfg = utils.parse_config('/etc/nuage-vsd-sim/config.ini')
         else:
-            raise RuntimeError('Unable to find a valid configuration file.')
+            cfg = ConfigParser.ConfigParser()
+            cfg.add_section('LOG')
+            cfg.set('LOG', 'directory', '')
+            cfg.set('LOG', 'file', '')
+            cfg.set('LOG', 'level', 'DEBUG')
 
         # Handling logging
         log_dir = cfg.get('LOG', 'directory')
