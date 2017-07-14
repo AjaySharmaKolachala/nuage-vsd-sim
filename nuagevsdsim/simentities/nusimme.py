@@ -42,7 +42,7 @@ from nuagevsdsim.common.utils import NUAGE_API_DATA
 class NUSimMe(Resource):
     @staticmethod
     def get():
-        logging.debug('me get request received')
+        logging.debug('GET - me')
         result = [
             {
                 "userName": NUAGE_API_DATA['user'][NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']].user_name,

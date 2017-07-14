@@ -45,10 +45,10 @@ NUAGE_API_DATA = {
         'csp_enterprise': ''
     },
     'enterprise': {},
-    'enterprise_user': {},
-    'enterprise_group': {},
+    'enterprise_user': {'_TYPE': 'child'},
+    'enterprise_group': {'_TYPE': 'child'},
     'group': {},
-    'group_user': {},
+    'group_user': {'_TYPE': 'member'},
     'user': {},
 }
 

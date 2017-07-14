@@ -54,12 +54,17 @@ class NUSimResource(Resource):
         pass
 
     def get(self, parent_type=None, parent_id=None, entity_id=None):
-        logging.debug('{0:s} get request received'.format(self.__vspk_class__.rest_name))
+        logging.debug('GET - {0:s} - parent_type: {1:s} - parent_id: {2:s} - entity_id: {3:s}'.format(
+            self.__vspk_class__.rest_name,
+            parent_type,
+            parent_id,
+            entity_id))
 
         if parent_type:
             parent_type = get_singular_name(parent_type)
 
         headers = self._parse_nuage_headers(headers=request.headers)
+        logging.debug('GET - {0:s} - headers: {1:s}'.format(self.__vspk_class__.rest_name, headers))
         http_filter = headers['X-Nuage-Filter']
 
         result = []
@@ -87,7 +92,7 @@ class NUSimResource(Resource):
         return result, 200, self._build_response_headers(request_headers=headers)
 
     def delete(self, entity_id=None):
-        logging.debug('{0:s} delete request received'.format(self.__vspk_class__.rest_name))
+        logging.debug('DELETE - {0:s} - entity_id: {1:s}'.format(self.__vspk_class__.rest_name, entity_id))
 
         if entity_id == NUAGE_API_DATA['ROOT_UUIDS']['csproot_user']:
             return_data = {
@@ -126,7 +131,12 @@ class NUSimResource(Resource):
         return '', 204
 
     def put(self, parent_type=None, parent_id=None, entity_id=None):
-        logging.debug('{0:s} put request received'.format(self.__vspk_class__.rest_name))
+        logging.debug('PUT - {0:s} - parent_type: {1:s} - parent_id: {2:s} - entity_id: {3:s}'.format(
+            self.__vspk_class__.rest_name,
+            parent_type,
+            parent_id,
+            entity_id))
+        logging.debug('PUT - data: {0}'.format(request.data))
 
         if parent_type:
             parent_type = get_singular_name(parent_type)
@@ -177,7 +187,11 @@ class NUSimResource(Resource):
             return None, 204
 
     def post(self, parent_type=None, parent_id=None):
-        logging.debug('{0:s} post request received'.format(self.__vspk_class__.rest_name))
+        logging.debug('POST - {0:s} - parent_type: {1:s} - parent_id: {2:s}'.format(
+            self.__vspk_class__.rest_name,
+            parent_type,
+            parent_id))
+        logging.debug('POST - data: {0}'.format(request.data))
 
         if parent_type:
             parent_type = get_singular_name(parent_type)
@@ -236,41 +250,6 @@ class NUSimResource(Resource):
                 NUAGE_API_DATA['{0:s}_{1:s}'.format(parent_type, self.__vspk_class__.rest_name)][parent_id] = {entity.id: entity}
         return [NUAGE_API_DATA[self.__vspk_class__.rest_name][entity.id].to_dict()], 201
 
-    @staticmethod
-    def _find_entities_by_field(data, field, value):
-        result = []
-        if data and field and value and len(data) > 0 and hasattr(data.itervalues().next(), get_idiomatic_name(field)):
-            result = list(v for k, v in data.iteritems() if getattr(v, get_idiomatic_name(field)) == value)
-        return result
-
-    @staticmethod
-    def _verify_filter(http_filter, entity):
-        if http_filter:
-            reg = re.search('[\'"]?([\w]*)[\'"]?\s*==\s*[\'"]?([\w\s-]*)[\'"]?', http_filter)
-            if len(reg.groups()) == 2:
-                field, value = reg.groups()
-                if hasattr(entity, get_idiomatic_name(field)) and getattr(entity, get_idiomatic_name(field)) == value:
-                    return True
-            return False
-        return True
-
-    @staticmethod
-    def _abort_mandatory_field(data=None, field=None):
-        if field not in data.keys() or not data[field]:
-            return_data = {
-                'errors': [{
-                    'property': field,
-                    'descriptions': [
-                        {
-                            'description': 'This value cannot be null',
-                            'title': 'Invalid input. Value cannot be null'
-                        }
-                    ]
-                }],
-                "internalErrorCode": 5001
-            }
-            abort(409, **return_data)
-
     def _abort_duplicate_field(self, data=None, field=None):
         if field in data.keys() and data[field]:
             results = self._find_entities_by_field(NUAGE_API_DATA[self.__vspk_class__.rest_name], field, data[field])
@@ -288,10 +267,6 @@ class NUSimResource(Resource):
                     "internalErrorCode": 9501
                 }
                 abort(409, **return_data)
-
-    def _abort_missing_entity(self, field, value):
-        if len(self._find_entities_by_field(data=NUAGE_API_DATA[self.__vspk_class__.rest_name], field=field, value=value)) == 0:
-            abort(404, message='Unable to find entity with field {0} and value {1}'.format(field, value))
 
     def _abort_get_wrong_parent(self, parent_type, parent_id):
         if parent_type not in self.__get_parents__:
@@ -321,6 +296,10 @@ class NUSimResource(Resource):
             }
             abort(409, **return_data)
 
+    def _abort_missing_entity(self, field, value):
+        if len(self._find_entities_by_field(data=NUAGE_API_DATA[self.__vspk_class__.rest_name], field=field, value=value)) == 0:
+            abort(404, message='Unable to find entity with field {0} and value {1}'.format(field, value))
+
     def _abort_post_wrong_parent(self, parent_type, parent_id):
         if parent_type not in self.__create_parents__:
             return_data = {
@@ -349,6 +328,40 @@ class NUSimResource(Resource):
             }
             abort(409, **return_data)
 
+    def _recursive_delete(self, entity_id, entity_type):
+        # Loop through database
+        for key in NUAGE_API_DATA.keys():
+            if key.startswith('{0:s}_'.format(entity_type)):
+                if entity_id in NUAGE_API_DATA[key].keys():
+                    if NUAGE_API_DATA[key]['_TYPE'] != 'member':
+                        for sub_key in NUAGE_API_DATA[key][entity_id].keys():
+                            if sub_key != '_TYPE':
+                                self._recursive_delete(entity_id=sub_key, entity_type=NUAGE_API_DATA[key][entity_id][sub_key].rest_name)
+                    del NUAGE_API_DATA[key][entity_id]
+            elif key.endswith('_{0:s}'.format(entity_type)):
+                for parent_id in NUAGE_API_DATA[key].keys():
+                    if parent_id != '_TYPE' and entity_id in NUAGE_API_DATA[key][parent_id].keys():
+                        del NUAGE_API_DATA[key][parent_id][entity_id]
+        # Delete entity itself
+        del NUAGE_API_DATA[entity_type][entity_id]
+
+    @staticmethod
+    def _abort_mandatory_field(data=None, field=None):
+        if field not in data.keys() or not data[field]:
+            return_data = {
+                'errors': [{
+                    'property': field,
+                    'descriptions': [
+                        {
+                            'description': 'This value cannot be null',
+                            'title': 'Invalid input. Value cannot be null'
+                        }
+                    ]
+                }],
+                "internalErrorCode": 5001
+            }
+            abort(409, **return_data)
+
     @staticmethod
     def _build_response_headers(request_headers=None):
         if request_headers is None:
@@ -357,6 +370,13 @@ class NUSimResource(Resource):
         for header, value in request_headers.iteritems():
             if value is not None:
                 result[header] = value
+        return result
+
+    @staticmethod
+    def _find_entities_by_field(data, field, value):
+        result = []
+        if data and field and value and len(data) > 0 and hasattr(data.itervalues().next(), get_idiomatic_name(field)):
+            result = list(v for k, v in data.iteritems() if getattr(v, get_idiomatic_name(field)) == value)
         return result
 
     @staticmethod
@@ -391,21 +411,13 @@ class NUSimResource(Resource):
                 result[header] = lower_headers[header.lower()]
         return result
 
-    def _recursive_delete(self, entity_id, entity_type):
-        logging.debug('{0}:{1}'.format(entity_type, entity_id))
-        # Loop through database
-        for key in NUAGE_API_DATA.keys():
-            logging.debug('--{0}'.format(key))
-            if key.startswith('{0:s}_'.format(entity_type)):
-                if entity_id in NUAGE_API_DATA[key].keys():
-                    for sub_key in NUAGE_API_DATA[key][entity_id].keys():
-                        logging.debug('--SW-SK--{0}'.format(sub_key))
-                        self._recursive_delete(entity_id=sub_key, entity_type=NUAGE_API_DATA[key][entity_id][sub_key].rest_name)
-                    del NUAGE_API_DATA[key][entity_id]
-            elif key.endswith('_{0:s}'.format(entity_type)):
-                for parent_id in NUAGE_API_DATA[key].keys():
-                    logging.debug('--EW-PI--{0}'.format(parent_id))
-                    if entity_id in NUAGE_API_DATA[key][parent_id].keys():
-                        del NUAGE_API_DATA[key][parent_id][entity_id]
-        # Delete entity itself
-        del NUAGE_API_DATA[entity_type][entity_id]
+    @staticmethod
+    def _verify_filter(http_filter, entity):
+        if http_filter:
+            reg = re.search('[\'"]?([\w]*)[\'"]?\s*==\s*[\'"]?([\w\s-]*)[\'"]?', http_filter)
+            if len(reg.groups()) == 2:
+                field, value = reg.groups()
+                if hasattr(entity, get_idiomatic_name(field)) and getattr(entity, get_idiomatic_name(field)) == value:
+                    return True
+            return False
+        return True
