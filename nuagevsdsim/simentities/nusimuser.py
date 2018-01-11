@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 # BSD 3-Clause License
 #
-# Copyright (c) 2017, Philippe Dellaert
+# Copyright (c) 2017, Nokia
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -28,24 +29,26 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-SimUser
+NUSimUser
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-
 class NUSimUser(NUSimResource):
+    """ Represents a User
+
+        Notes:
+            Object that identifies the user functions.
+    """
+
     __vspk_class__ = vsdk.NUUser
-    __unique_fields__ = ['userName']
-    __mandatory_fields__ = ['userName', 'password', 'email', 'firstName', 'lastName']
+    __unique_fields__ = ['externalID']
+    __mandatory_fields__ = ['password', 'lastName', 'firstName', 'email', 'userName']
     __default_fields__ = {
-        'managedMode': "DEFAULT",
-        'disabled': False,
-        'entityScope': 'ENTERPRISE',
-        'parentType': 'enterprise'
+        
     }
-    __get_parents__ = ['me', 'enterprise', 'group']
+    __get_parents__ = ['enterprise', 'group', 'me']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

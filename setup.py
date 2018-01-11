@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 # BSD 3-Clause License
 #
-# Copyright (c) 2017, Philippe Dellaert
+# Copyright (c) 2017, Nokia
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -35,12 +36,12 @@ except ImportError:
 
 setup(
     name='nuage-vsd-sim',
-    version='1.0.0b6',
-    description='A sample Nuage VSD API simulator',
-    url='http://github.com/pdellaert/nuage-vsd-sim',
-    author='Philippe Dellaert',
-    author_email='philippe@dellaert.org',
-    license='BSD 3-Clause',
+    version='5.2.1',
+    description='API simulator of Nuage VSD',
+    url='http://nuagenetworks.net/',
+    author='nuage networks',
+    author_email='opensource@nuagenetworks.net',
+    license='',
     classifiers=(
         'Development Status :: 4 - Beta',
         'Environment :: Console',
@@ -56,14 +57,14 @@ setup(
         'Topic :: System :: Systems Administration',
         'Topic :: Utilities'
     ),
-    keywords='Nuage VSD API simulator',
+    keywords='API simulator of Nuage VSD',
     packages=[
         'nuagevsdsim',
         'nuagevsdsim.common',
         'nuagevsdsim.simentities',
     ],
     install_requires=[
-        'vspk>=5.0.0',
+        'vspk==5.2.1',
         'flask-restful'
     ],
     python_requires='>=2.6, <3',

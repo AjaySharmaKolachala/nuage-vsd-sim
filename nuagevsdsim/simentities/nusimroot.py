@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 # BSD 3-Clause License
 #
-# Copyright (c) 2017, Philippe Dellaert
+# Copyright (c) 2017, Nokia
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -37,4 +38,3 @@ class NUSimRoot(Resource):
 
     def get(self):
         return NUAGE_API_DATA
-

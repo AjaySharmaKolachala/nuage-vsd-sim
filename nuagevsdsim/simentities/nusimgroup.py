@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 # BSD 3-Clause License
 #
-# Copyright (c) 2017, Philippe Dellaert
+# Copyright (c) 2017, Nokia
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -28,24 +29,26 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-SimGroup
+NUSimGroup
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-
 class NUSimGroup(NUSimResource):
+    """ Represents a Group
+
+        Notes:
+            Identifies a group within an enterprise
+    """
+
     __vspk_class__ = vsdk.NUGroup
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
-        'accountRestrictions': False,
-        'managementMode': 'DEFAULT',
-        'private': False,
-        'role': "ORGUSER"
+        
     }
-    __get_parents__ = ['enterprise']
+    __get_parents__ = ['domain', 'domaintemplate', 'enterprise', 'l2domain', 'l2domaintemplate', 'user', 'zone']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

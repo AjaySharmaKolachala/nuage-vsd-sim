@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 # BSD 3-Clause License
 #
-# Copyright (c) 2017, Philippe Dellaert
+# Copyright (c) 2017, Nokia
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -28,28 +29,28 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-SimEnterprise
+NUSimEnterprise
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-
 class NUSimEnterprise(NUSimResource):
+    """ Represents a Enterprise
+
+        Notes:
+            Definition of the enterprise object. This is the top level object that represents an enterprise.
+    """
+
     __vspk_class__ = vsdk.NUEnterprise
-    __unique_fields__ = ['name']
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
-        'BGPEnabled': False,
-        'DHCPLeaseInterval': 24,
-        'entityScope': 'ENTERPRISE',
-        'floatingIPsQuota': 24,
-        'floatingIPsUsed': 0,
-        'LDAPAuthorizationEnabled': False,
-        'LDAPEnabled': False,
-        'allowedForwardingClasses': ['H']
+        'VNFManagementEnabled': False,
+        'dictionaryVersion': 1,
+        'enableApplicationPerformanceManagement': False
     }
-    __get_parents__ = ['me']
+    __get_parents__ = ['enterpriseprofile', 'me']
     __create_parents__ = ['me']
 
     def __init__(self):
