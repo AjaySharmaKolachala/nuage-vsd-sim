@@ -42,7 +42,7 @@ setup(
     author='nuage networks',
     author_email='opensource@nuagenetworks.net',
     license='',
-    classifiers=(
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Information Technology',
@@ -56,7 +56,7 @@ setup(
         'Topic :: System :: Networking',
         'Topic :: System :: Systems Administration',
         'Topic :: Utilities'
-    ),
+    ],
     keywords='API simulator of Nuage VSD',
     packages=[
         'nuagevsdsim',
