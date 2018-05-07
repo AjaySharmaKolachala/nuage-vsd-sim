@@ -330,6 +330,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/customproperties'
         )
         self.api.add_resource(
+            sim.NUSimDefaultGateway,
+            '/nuage/api/v5_0/defaultgateways',
+            '/nuage/api/v5_0/defaultgateways/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/defaultgateways'
+        )
+        self.api.add_resource(
             sim.NUSimDemarcationService,
             '/nuage/api/v5_0/demarcationservices',
             '/nuage/api/v5_0/demarcationservices/<entity_id>',
@@ -914,6 +920,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/nsginfos',
             '/nuage/api/v5_0/nsginfos/<entity_id>',
             '/nuage/api/v5_0/<parent_type>/<parent_id>/nsginfos'
+        )
+        self.api.add_resource(
+            sim.NUSimNSGPatchProfile,
+            '/nuage/api/v5_0/nsgpatchprofiles',
+            '/nuage/api/v5_0/nsgpatchprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/nsgpatchprofiles'
         )
         self.api.add_resource(
             sim.NUSimNSRedundantGatewayGroup,

@@ -47,6 +47,7 @@ class NUSimL2Domain(NUSimResource):
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'DPI': 'DISABLED',
+        'flowCollectionEnabled': 'INHERITED',
         'dynamicIpv6Address': False
     }
     __get_parents__ = ['enterprise', 'l2domaintemplate', 'me']

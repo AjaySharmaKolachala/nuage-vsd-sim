@@ -47,6 +47,7 @@ class NUSimOSPFInstance(NUSimResource):
     __mandatory_fields__ = ['name', 'exportLimit']
     __default_fields__ = {
         'preference': 10,
+        'superBackboneEnabled': False,
         'exportToOverlay': False,
         'externalPreference': 150
     }

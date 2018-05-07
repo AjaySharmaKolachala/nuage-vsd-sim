@@ -47,7 +47,8 @@ class NUSimTier(NUSimResource):
     __mandatory_fields__ = ['tierType']
     __default_fields__ = {
         'packetCount': 1,
-        'downThresholdCount': 15,
+        'timeout': 3000,
+        'downThresholdCount': 5,
         'probeInterval': 10
     }
     __get_parents__ = ['performancemonitor']

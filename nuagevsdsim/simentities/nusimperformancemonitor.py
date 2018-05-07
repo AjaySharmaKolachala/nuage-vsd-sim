@@ -46,8 +46,9 @@ class NUSimPerformanceMonitor(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name', 'interval', 'numberOfPackets']
     __default_fields__ = {
-        'payloadSize': 108,
+        'payloadSize': 137,
         'readOnly': False,
+        'serviceClass': 'H',
         'timeout': 1000,
         'interval': 3000,
         'holdDownTimer': 900,

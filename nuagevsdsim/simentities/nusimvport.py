@@ -47,6 +47,7 @@ class NUSimVPort(NUSimResource):
     __mandatory_fields__ = ['name', 'addressSpoofing', 'type']
     __default_fields__ = {
         'DPI': 'INHERITED',
+        'flowCollectionEnabled': 'INHERITED',
         'subType': 'NONE'
     }
     __get_parents__ = ['domain', 'floatingip', 'l2domain', 'multinicvport', 'overlaymirrordestination', 'policygroup', 'redirectiontarget', 'subnet', 'trunk', 'vrs', 'zone']

@@ -29,55 +29,27 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-NUSimSystemConfig
+NUSimNSGPatchProfile
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-class NUSimSystemConfig(NUSimResource):
-    """ Represents a SystemConfig
+class NUSimNSGPatchProfile(NUSimResource):
+    """ Represents a NSGPatchProfile
 
         Notes:
-            The system configuration which can be dynamically managed using rest api.
+            This profile represents the patch information to be used by an NSG for applying a patch.
     """
 
-    __vspk_class__ = vsdk.NUSystemConfig
+    __vspk_class__ = vsdk.NUNSGPatchProfile
     __unique_fields__ = ['externalID']
-    __mandatory_fields__ = []
+    __mandatory_fields__ = ['patchURL']
     __default_fields__ = {
-        'AARFlowStatsInterval': 30,
-        'AARProbeStatsInterval': 30,
-        'ZFBRequestRetryTimer': 30,
-        'PGIDLowerLimit': 65536,
-        'PGIDUpperLimit': 2147483647,
-        'VMCacheSize': 5000,
-        'VMPurgeTime': 60,
-        'VMResyncDeletionWaitTime': 2,
-        'VMResyncOutstandingInterval': 1000,
-        'VMUnreachableCleanupTime': 7200,
-        'VMUnreachableTime': 3600,
-        'VNFTaskTimeout': 3600,
-        'VPortInitStatefulTimer': 300,
-        'VSSStatsInterval': 30,
-        'pageMaxSize': 500,
-        'pageSize': 50,
-        'accumulateLicensesEnabled': False,
-        'perDomainVlanIdEnabled': False,
-        'virtualFirewallRulesEnabled': False,
-        'elasticClusterName': 'nuage_elasticsearch',
-        'allowEnterpriseAvatarOnNSG': True,
-        'infrastructureBGPASNumber': 65500,
-        'csprootAuthenticationMethod': 'LOCAL',
-        'statsMinDuration': 2592000,
-        'stickyECMPIdleTimeout': 0,
-        'attachProbeToIPsecNPM': False,
-        'attachProbeToVXLANNPM': False,
-        'subnetResyncInterval': 10,
-        'dynamicWANServiceDiffTime': 1
+        
     }
     __get_parents__ = ['me']
-    __create_parents__ = []
+    __create_parents__ = ['me']
 
     def __init__(self):
-        super(NUSimSystemConfig, self).__init__()
+        super(NUSimNSGPatchProfile, self).__init__()

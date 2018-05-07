@@ -46,7 +46,7 @@ class NUSimVirtualIP(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['virtualIP']
     __default_fields__ = {
-        
+        'IPType': 'IPV4'
     }
     __get_parents__ = ['redirectiontarget', 'subnet', 'vport']
     __create_parents__ = ['redirectiontarget', 'vport']

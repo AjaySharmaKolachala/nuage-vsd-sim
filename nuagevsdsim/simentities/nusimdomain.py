@@ -47,7 +47,8 @@ class NUSimDomain(NUSimResource):
     __mandatory_fields__ = ['name', 'templateID']
     __default_fields__ = {
         'FIPUnderlay': False,
-        'DPI': 'DISABLED'
+        'DPI': 'DISABLED',
+        'flowCollectionEnabled': 'INHERITED'
     }
     __get_parents__ = ['domain', 'domaintemplate', 'enterprise', 'firewallacl', 'me']
     __create_parents__ = ['enterprise']

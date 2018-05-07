@@ -46,7 +46,8 @@ class NUSimZone(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
-        'DPI': 'INHERITED'
+        'DPI': 'INHERITED',
+        'flowCollectionEnabled': 'INHERITED'
     }
     __get_parents__ = ['domain', 'me']
     __create_parents__ = ['domain']

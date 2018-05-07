@@ -29,55 +29,27 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-NUSimSystemConfig
+NUSimDefaultGateway
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-class NUSimSystemConfig(NUSimResource):
-    """ Represents a SystemConfig
+class NUSimDefaultGateway(NUSimResource):
+    """ Represents a DefaultGateway
 
         Notes:
-            The system configuration which can be dynamically managed using rest api.
+            This object represent default Gateway associated with Subnet
     """
 
-    __vspk_class__ = vsdk.NUSystemConfig
-    __unique_fields__ = ['externalID']
+    __vspk_class__ = vsdk.NUDefaultGateway
+    __unique_fields__ = []
     __mandatory_fields__ = []
     __default_fields__ = {
-        'AARFlowStatsInterval': 30,
-        'AARProbeStatsInterval': 30,
-        'ZFBRequestRetryTimer': 30,
-        'PGIDLowerLimit': 65536,
-        'PGIDUpperLimit': 2147483647,
-        'VMCacheSize': 5000,
-        'VMPurgeTime': 60,
-        'VMResyncDeletionWaitTime': 2,
-        'VMResyncOutstandingInterval': 1000,
-        'VMUnreachableCleanupTime': 7200,
-        'VMUnreachableTime': 3600,
-        'VNFTaskTimeout': 3600,
-        'VPortInitStatefulTimer': 300,
-        'VSSStatsInterval': 30,
-        'pageMaxSize': 500,
-        'pageSize': 50,
-        'accumulateLicensesEnabled': False,
-        'perDomainVlanIdEnabled': False,
-        'virtualFirewallRulesEnabled': False,
-        'elasticClusterName': 'nuage_elasticsearch',
-        'allowEnterpriseAvatarOnNSG': True,
-        'infrastructureBGPASNumber': 65500,
-        'csprootAuthenticationMethod': 'LOCAL',
-        'statsMinDuration': 2592000,
-        'stickyECMPIdleTimeout': 0,
-        'attachProbeToIPsecNPM': False,
-        'attachProbeToVXLANNPM': False,
-        'subnetResyncInterval': 10,
-        'dynamicWANServiceDiffTime': 1
+        
     }
-    __get_parents__ = ['me']
+    __get_parents__ = ['subnet']
     __create_parents__ = []
 
     def __init__(self):
-        super(NUSimSystemConfig, self).__init__()
+        super(NUSimDefaultGateway, self).__init__()

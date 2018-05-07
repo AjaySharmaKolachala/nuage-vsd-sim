@@ -43,7 +43,7 @@ class NUSimUnderlay(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUUnderlay
-    __unique_fields__ = []
+    __unique_fields__ = ['underlayId', 'externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         

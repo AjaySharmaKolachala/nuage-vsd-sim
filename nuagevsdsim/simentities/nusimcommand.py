@@ -48,7 +48,8 @@ class NUSimCommand(NUSimResource):
     __default_fields__ = {
         'detailedStatusCode': 0,
         'command': 'UNKNOWN',
-        'status': 'UNKNOWN'
+        'status': 'UNKNOWN',
+        'override': 'UNSPECIFIED'
     }
     __get_parents__ = ['nsgateway']
     __create_parents__ = ['nsgateway']

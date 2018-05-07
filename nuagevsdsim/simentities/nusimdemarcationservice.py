@@ -39,7 +39,7 @@ class NUSimDemarcationService(NUSimResource):
     """ Represents a DemarcationService
 
         Notes:
-            None
+            test
     """
 
     __vspk_class__ = vsdk.NUDemarcationService

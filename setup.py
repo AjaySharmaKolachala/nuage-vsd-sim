@@ -36,7 +36,7 @@ except ImportError:
 
 setup(
     name='nuage-vsd-sim',
-    version='5.2.1',
+    version='5.2.2',
     description='API simulator of Nuage VSD',
     url='http://nuagenetworks.net/',
     author='nuage networks',
@@ -64,7 +64,7 @@ setup(
         'nuagevsdsim.simentities',
     ],
     install_requires=[
-        'vspk==5.2.1',
+        'vspk==5.2.2',
         'flask-restful'
     ],
     python_requires='>=2.6, <3',

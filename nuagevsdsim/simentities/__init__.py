@@ -70,6 +70,7 @@ from .nusimcosremarkingpolicytable import NUSimCOSRemarkingPolicyTable
 from .nusimcsnatpool import NUSimCSNATPool
 from .nusimctranslationmap import NUSimCTranslationMap
 from .nusimcustomproperty import NUSimCustomProperty
+from .nusimdefaultgateway import NUSimDefaultGateway
 from .nusimdemarcationservice import NUSimDemarcationService
 from .nusimdestinationurl import NUSimDestinationurl
 from .nusimdhcpoption import NUSimDHCPOption
@@ -167,6 +168,7 @@ from .nusimnsgateway import NUSimNSGateway
 from .nusimnsgatewaytemplate import NUSimNSGatewayTemplate
 from .nusimnsggroup import NUSimNSGGroup
 from .nusimnsginfo import NUSimNSGInfo
+from .nusimnsgpatchprofile import NUSimNSGPatchProfile
 from .nusimnsgroutingpolicybinding import NUSimNSGRoutingPolicyBinding
 from .nusimnsgupgradeprofile import NUSimNSGUpgradeProfile
 from .nusimnsport import NUSimNSPort

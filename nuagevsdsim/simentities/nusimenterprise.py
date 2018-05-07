@@ -48,6 +48,7 @@ class NUSimEnterprise(NUSimResource):
     __default_fields__ = {
         'VNFManagementEnabled': False,
         'dictionaryVersion': 1,
+        'flowCollectionEnabled': 'DISABLED',
         'enableApplicationPerformanceManagement': False
     }
     __get_parents__ = ['enterpriseprofile', 'me']

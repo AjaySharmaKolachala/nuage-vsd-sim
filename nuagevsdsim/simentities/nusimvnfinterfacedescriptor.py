@@ -46,7 +46,7 @@ class NUSimVNFInterfaceDescriptor(NUSimResource):
     __unique_fields__ = []
     __mandatory_fields__ = ['name']
     __default_fields__ = {
-        'isManagementInterface': False
+        'type': 'MANAGEMENT'
     }
     __get_parents__ = ['vnfdescriptor']
     __create_parents__ = ['vnfdescriptor']

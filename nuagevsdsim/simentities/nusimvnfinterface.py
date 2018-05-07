@@ -46,7 +46,7 @@ class NUSimVNFInterface(NUSimResource):
     __unique_fields__ = []
     __mandatory_fields__ = []
     __default_fields__ = {
-        'isManagementInterface': False
+        
     }
     __get_parents__ = ['vnf', 'vport']
     __create_parents__ = []

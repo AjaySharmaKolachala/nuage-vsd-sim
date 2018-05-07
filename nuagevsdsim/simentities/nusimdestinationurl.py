@@ -46,7 +46,11 @@ class NUSimDestinationurl(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
-        'HTTPMethod': 'HEAD'
+        'HTTPMethod': 'HEAD',
+        'packetCount': 1,
+        'timeout': 3000,
+        'downThresholdCount': 3,
+        'probeInterval': 10
     }
     __get_parents__ = ['tier']
     __create_parents__ = ['tier']

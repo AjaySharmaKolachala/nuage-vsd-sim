@@ -46,7 +46,8 @@ class NUSimVNFDescriptor(NUSimResource):
     __unique_fields__ = []
     __mandatory_fields__ = ['name', 'memoryMB', 'metadataID', 'storageGB']
     __default_fields__ = {
-        'visible': True
+        'visible': True,
+        'type': 'FIREWALL'
     }
     __get_parents__ = ['vnfcatalog']
     __create_parents__ = ['vnfcatalog']
