@@ -39,7 +39,7 @@ class NUSimMirrorDestination(NUSimResource):
     """ Represents a MirrorDestination
 
         Notes:
-            Represents a mirror destination.
+            Mirror Destinations are underlay-reachable IP addresses to which the mirrored traffic will be sent. On the server identified by the IP, a tool like Wireshark can be used to capture and analyse the traffic going through a VPort. The mirrored traffic is sent to the collector using GRE encapsulation.
     """
 
     __vspk_class__ = vsdk.NUMirrorDestination

@@ -43,7 +43,7 @@ class NUSimDUCGroup(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUDUCGroup
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         

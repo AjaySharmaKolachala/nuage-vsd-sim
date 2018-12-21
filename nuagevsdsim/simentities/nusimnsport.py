@@ -48,6 +48,7 @@ class NUSimNSPort(NUSimResource):
     __default_fields__ = {
         'NATTraversal': 'NONE',
         'VLANRange': '0-4094',
+        'shuntPort': False,
         'enableNATProbes': True,
         'speed': 'AUTONEGOTIATE',
         'TrafficThroughUBROnly': False,

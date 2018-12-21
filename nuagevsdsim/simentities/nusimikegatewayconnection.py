@@ -39,7 +39,7 @@ class NUSimIKEGatewayConnection(NUSimResource):
     """ Represents a IKEGatewayConnection
 
         Notes:
-            Represents an IKE Gateway Connection object
+            Set the attributes like NSG role, authentication method etc for establishing IKE security association with remote gateway.
     """
 
     __vspk_class__ = vsdk.NUIKEGatewayConnection

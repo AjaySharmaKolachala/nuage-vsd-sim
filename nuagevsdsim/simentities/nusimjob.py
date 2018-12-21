@@ -48,8 +48,8 @@ class NUSimJob(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['enterprise', 'gateway', 'me', 'nsgateway', 'vport']
-    __create_parents__ = ['domain', 'domaintemplate', 'egressaclentrytemplate', 'egressacltemplate', 'egressadvfwdentrytemplate', 'egressadvfwdtemplate', 'enterprise', 'gateway', 'hsc', 'ingressaclentrytemplate', 'ingressacltemplate', 'ingressadvfwdentrytemplate', 'ingressadvfwdtemplate', 'ingressexternalserviceentrytemplate', 'ingressexternalservicetemplate', 'l2domain', 'l2domaintemplate', 'me', 'nsgateway', 'policygroup', 'policygrouptemplate', 'redirectiontarget', 'redirectiontargettemplate', 'vcenter', 'vcentercluster', 'vcenterhypervisor', 'virtualfirewallrule', 'vnf', 'vport', 'vrs', 'vsc', 'vsd', 'zfbrequest']
+    __get_parents__ = ['egressacltemplate', 'enterprise', 'gateway', 'ingressacltemplate', 'ingressadvfwdtemplate', 'me', 'nsgateway', 'redundancygroup', 'vport']
+    __create_parents__ = ['domain', 'domaintemplate', 'egressacltemplate', 'enterprise', 'gateway', 'hsc', 'ingressacltemplate', 'ingressadvfwdtemplate', 'l2domain', 'l2domaintemplate', 'me', 'nsgateway', 'redundancygroup', 'vcenter', 'vcentercluster', 'vcenterhypervisor', 'vnf', 'vport', 'vrs', 'vsc', 'vsd', 'zfbrequest']
 
     def __init__(self):
         super(NUSimJob, self).__init__()

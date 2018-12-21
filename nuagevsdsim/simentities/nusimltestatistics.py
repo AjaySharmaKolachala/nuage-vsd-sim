@@ -39,7 +39,7 @@ class NUSimLtestatistics(NUSimResource):
     """ Represents a Ltestatistics
 
         Notes:
-            Retrieves statistics for LTE uplink
+            Retrieves statistical information for LTE uplinks.
     """
 
     __vspk_class__ = vsdk.NULtestatistics
@@ -49,7 +49,7 @@ class NUSimLtestatistics(NUSimResource):
         
     }
     __get_parents__ = ['vlan']
-    __create_parents__ = ['vlan']
+    __create_parents__ = []
 
     def __init__(self):
         super(NUSimLtestatistics, self).__init__()

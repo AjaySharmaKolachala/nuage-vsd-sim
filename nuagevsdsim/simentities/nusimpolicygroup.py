@@ -48,7 +48,7 @@ class NUSimPolicyGroup(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['bridgeinterface', 'containerinterface', 'domain', 'hostinterface', 'l2domain', 'me', 'vminterface', 'vport']
+    __get_parents__ = ['bridgeinterface', 'containerinterface', 'domain', 'hostinterface', 'l2domain', 'me', 'policygroupcategory', 'vminterface', 'vport']
     __create_parents__ = ['domain', 'l2domain']
 
     def __init__(self):

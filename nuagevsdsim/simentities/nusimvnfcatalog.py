@@ -43,7 +43,7 @@ class NUSimVNFCatalog(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUVNFCatalog
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         

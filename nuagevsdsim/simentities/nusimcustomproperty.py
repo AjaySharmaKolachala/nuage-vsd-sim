@@ -39,11 +39,11 @@ class NUSimCustomProperty(NUSimResource):
     """ Represents a CustomProperty
 
         Notes:
-            Developed in the context of the Uplink Connection on the NSG, this API could be used for other types of objects.  It is used as a collection of name-value (or key-value) pairs for custom attributes that could be used to enrich existing class instances.
+            Developed in the context of the Uplink Connection on the NSG, this API could be used for other types of objects. It is used as a collection of name-value (or key-value) pairs for custom attributes that could be used to enrich existing class instances.
     """
 
     __vspk_class__ = vsdk.NUCustomProperty
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         

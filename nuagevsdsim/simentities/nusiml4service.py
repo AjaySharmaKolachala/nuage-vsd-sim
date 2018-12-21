@@ -39,7 +39,7 @@ class NUSimL4Service(NUSimResource):
     """ Represents a L4Service
 
         Notes:
-            L4 Service is a port range and protocol combination that can be used in ACLs
+            Service is a port range and protocol combination that can be used in ACLs
     """
 
     __vspk_class__ = vsdk.NUL4Service

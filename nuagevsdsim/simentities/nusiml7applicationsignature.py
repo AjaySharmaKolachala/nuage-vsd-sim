@@ -43,13 +43,13 @@ class NUSimL7applicationsignature(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUL7applicationsignature
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'readonly': False,
         'deprecated': False
     }
-    __get_parents__ = ['enterprise']
+    __get_parents__ = ['enterprise', 'me']
     __create_parents__ = []
 
     def __init__(self):

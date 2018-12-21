@@ -48,7 +48,7 @@ class NUSimStatistics(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['addressmap', 'bridgeinterface', 'containerinterface', 'domain', 'egressaclentrytemplate', 'egressadvfwdentrytemplate', 'hostinterface', 'ingressaclentrytemplate', 'ingressadvfwdentrytemplate', 'ingressexternalserviceentrytemplate', 'l2domain', 'nsport', 'patnatpool', 'subnet', 'virtualfirewallrule', 'vlan', 'vminterface', 'vport', 'wirelessport', 'zone']
+    __get_parents__ = ['addressmap', 'bridgeinterface', 'containerinterface', 'domain', 'egressaclentrytemplate', 'hostinterface', 'ingressaclentrytemplate', 'ingressadvfwdentrytemplate', 'l2domain', 'nsport', 'patnatpool', 'subnet', 'vlan', 'vminterface', 'vport', 'vrs', 'vsc', 'zone']
     __create_parents__ = []
 
     def __init__(self):

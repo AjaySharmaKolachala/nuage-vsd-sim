@@ -48,13 +48,15 @@ class NUSimApplication(NUSimResource):
     __default_fields__ = {
         'readOnly': False,
         'performanceMonitorType': 'FIRST_PACKET',
+        'certificateCommonName': '*',
+        'networkSymmetry': False,
         'enablePPS': False,
         'postClassificationPath': 'ANY',
         'preClassificationPath': 'DEFAULT',
         'protocol': 'NONE',
         'symmetry': False
     }
-    __get_parents__ = ['enterprise', 'l7applicationsignature']
+    __get_parents__ = ['domain', 'enterprise', 'l2domain', 'l7applicationsignature', 'me']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

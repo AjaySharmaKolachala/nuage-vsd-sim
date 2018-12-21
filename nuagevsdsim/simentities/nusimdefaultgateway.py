@@ -43,7 +43,7 @@ class NUSimDefaultGateway(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUDefaultGateway
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         

@@ -46,7 +46,7 @@ class NUSimVPortMirror(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
-        
+        'mirrorDirection': 'BOTH'
     }
     __get_parents__ = ['mirrordestination', 'vport']
     __create_parents__ = ['vport']

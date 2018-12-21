@@ -49,9 +49,8 @@ class NUSimPerformanceMonitor(NUSimResource):
         'payloadSize': 137,
         'readOnly': False,
         'serviceClass': 'H',
-        'timeout': 1000,
         'interval': 3000,
-        'holdDownTimer': 900,
+        'holdDownTimer': 1000,
         'probeType': 'ONEWAY',
         'numberOfPackets': 1
     }

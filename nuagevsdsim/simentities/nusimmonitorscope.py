@@ -43,12 +43,12 @@ class NUSimMonitorscope(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUMonitorscope
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'readOnly': False
     }
-    __get_parents__ = ['application', 'networkperformancemeasurement', 'nsgateway']
+    __get_parents__ = ['application', 'networkperformancemeasurement']
     __create_parents__ = ['application', 'networkperformancemeasurement']
 
     def __init__(self):

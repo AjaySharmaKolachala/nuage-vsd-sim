@@ -39,15 +39,17 @@ class NUSimUplinkConnection(NUSimResource):
     """ Represents a UplinkConnection
 
         Notes:
-            None
+            Configuration of VNS Gateway uplinks
     """
 
     __vspk_class__ = vsdk.NUUplinkConnection
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         'PATEnabled': True,
+        'addressFamily': 'IPV4',
         'underlayEnabled': True,
+        'inherited': False,
         'installerManaged': False,
         'interfaceConnectionType': 'AUTOMATIC',
         'mode': 'Dynamic',

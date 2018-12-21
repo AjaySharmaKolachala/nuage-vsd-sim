@@ -39,11 +39,11 @@ class NUSimNSGGroup(NUSimResource):
     """ Represents a NSGGroup
 
         Notes:
-            None
+            A logical group of NSG and NSG-BR instances that can be used to assign NSG-UBRs to all NSGs in the group, to provide connectivity to NSGs in disjoint underlays.
     """
 
     __vspk_class__ = vsdk.NUNSGGroup
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         

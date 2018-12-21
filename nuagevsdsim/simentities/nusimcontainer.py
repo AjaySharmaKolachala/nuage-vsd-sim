@@ -39,7 +39,7 @@ class NUSimContainer(NUSimResource):
     """ Represents a Container
 
         Notes:
-            Read only API that can retrieve the containers associated with a domain, zone or subnet for mediation created containers for REST created  containers you need to set the additional proxy user header in http request : X-Nuage-ProxyUservalue of the header has to be either :1) enterpriseName@UserName (example : Alcatel Lucent@bob), or 2) external ID of user in VSD, typically is UUID generally decided by the CMS tool in questionUser needs to have CMS privileges to use proxy user header.
+            API that can retrieve the containers associated with a domain, zone or subnet for mediation created containers for REST created  containers you need to set the additional proxy user header in http request : X-Nuage-ProxyUservalue of the header has to be either :1) enterpriseName@UserName (example : Alcatel Lucent@bob), or 2) external ID of user in VSD, typically is UUID generally decided by the CMS tool in questionUser needs to have CMS privileges to use proxy user header.
     """
 
     __vspk_class__ = vsdk.NUContainer

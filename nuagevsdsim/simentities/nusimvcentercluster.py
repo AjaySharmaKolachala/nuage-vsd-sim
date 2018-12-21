@@ -46,13 +46,16 @@ class NUSimVCenterCluster(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name', 'secondaryDataUplinkEnabled', 'revertiveControllerEnabled', 'revertiveTimer']
     __default_fields__ = {
+        'manageVRSAvailability': False,
         'secondaryDataUplinkDHCPEnabled': False,
         'secondaryDataUplinkEnabled': False,
         'secondaryDataUplinkMTU': 1500,
         'secondaryDataUplinkUnderlayID': 1,
+        'secondaryDataUplinkVDFControlVLAN': 0,
         'memorySizeInGB': 'DEFAULT_4',
         'remoteSyslogServerPort': 514,
         'remoteSyslogServerType': 'NONE',
+        'personality': 'VRS',
         'destinationMirrorPort': 'no_mirror',
         'revertiveControllerEnabled': False,
         'revertiveTimer': 300,
@@ -62,6 +65,7 @@ class NUSimVCenterCluster(NUSimResource):
         'configuredMetricsPushInterval': 60,
         'cpuCount': 'DEFAULT_2',
         'primaryDataUplinkUnderlayID': 0,
+        'primaryDataUplinkVDFControlVLAN': 0,
         'avrsEnabled': False,
         'avrsProfile': 'AVRS_25G'
     }

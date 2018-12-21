@@ -48,7 +48,7 @@ class NUSimGatewaySecurity(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['nsgateway']
+    __get_parents__ = ['gateway', 'nsgateway']
     __create_parents__ = []
 
     def __init__(self):

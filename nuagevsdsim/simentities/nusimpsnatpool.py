@@ -43,8 +43,8 @@ class NUSimPSNATPool(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUPSNATPool
-    __unique_fields__ = []
-    __mandatory_fields__ = ['endAddress', 'startAddress']
+    __unique_fields__ = ['externalID']
+    __mandatory_fields__ = ['name', 'endAddress', 'startAddress']
     __default_fields__ = {
         
     }

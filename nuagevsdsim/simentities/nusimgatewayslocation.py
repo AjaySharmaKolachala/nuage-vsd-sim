@@ -29,27 +29,27 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-NUSimFloatingIPACLTemplate
+NUSimGatewaysLocation
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-class NUSimFloatingIPACLTemplate(NUSimResource):
-    """ Represents a FloatingIPACLTemplate
+class NUSimGatewaysLocation(NUSimResource):
+    """ Represents a GatewaysLocation
 
         Notes:
-            Defines the template for an Floating IP ACL
+            Gateway location details
     """
 
-    __vspk_class__ = vsdk.NUFloatingIPACLTemplate
+    __vspk_class__ = vsdk.NUGatewaysLocation
     __unique_fields__ = ['externalID']
-    __mandatory_fields__ = []
+    __mandatory_fields__ = ['timeZoneID']
     __default_fields__ = {
-        
+        'timeZoneID': 'UTC'
     }
-    __get_parents__ = ['domain', 'domaintemplate', 'me']
-    __create_parents__ = ['domain', 'domaintemplate', 'me']
+    __get_parents__ = ['enterprise']
+    __create_parents__ = []
 
     def __init__(self):
-        super(NUSimFloatingIPACLTemplate, self).__init__()
+        super(NUSimGatewaysLocation, self).__init__()

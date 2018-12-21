@@ -43,7 +43,7 @@ class NUSimVNFInterfaceDescriptor(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUVNFInterfaceDescriptor
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'type': 'MANAGEMENT'

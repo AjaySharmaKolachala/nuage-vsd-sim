@@ -49,7 +49,7 @@ class NUSimUser(NUSimResource):
         
     }
     __get_parents__ = ['enterprise', 'group', 'me']
-    __create_parents__ = ['enterprise']
+    __create_parents__ = ['enterprise', 'me']
 
     def __init__(self):
         super(NUSimUser, self).__init__()

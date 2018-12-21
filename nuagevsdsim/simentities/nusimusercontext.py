@@ -43,11 +43,12 @@ class NUSimUserContext(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUUserContext
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         'AARFlowStatsInterval': 30,
         'AARProbeStatsInterval': 30,
+        'VSSFeatureEnabled': False,
         'VSSStatsInterval': 30
     }
     __get_parents__ = ['me']

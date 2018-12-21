@@ -39,7 +39,7 @@ class NUSimIKEPSK(NUSimResource):
     """ Represents a IKEPSK
 
         Notes:
-            Represents an IKE Pre Shared Key
+            Shared secret used during the authentication phase of IKE protocol.
     """
 
     __vspk_class__ = vsdk.NUIKEPSK

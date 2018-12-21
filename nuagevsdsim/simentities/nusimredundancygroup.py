@@ -46,9 +46,10 @@ class NUSimRedundancyGroup(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
-        
+        'gatewayPeer1Connected': False,
+        'gatewayPeer2Connected': False
     }
-    __get_parents__ = ['enterprise', 'me']
+    __get_parents__ = ['enterprise', 'l2domain', 'me']
     __create_parents__ = ['enterprise', 'me']
 
     def __init__(self):

@@ -39,7 +39,7 @@ class NUSimMultiCastRange(NUSimResource):
     """ Represents a MultiCastRange
 
         Notes:
-            This is the definition of a MultiCast Range associated with a MultiCast Channel Map.
+            A multicast channel range defines a set of multicast groups that will be allowed to be joined. They act as a set of "white-list" addresses that a VM will be allowed to join. A multicast channel map requires at least one range defined to be of use. Ranges within the same channel map must be non-overlapping between each other. Groups not covered by a range won't be joinable from the VMs.
     """
 
     __vspk_class__ = vsdk.NUMultiCastRange

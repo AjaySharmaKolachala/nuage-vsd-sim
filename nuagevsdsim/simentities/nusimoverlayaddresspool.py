@@ -43,7 +43,7 @@ class NUSimOverlayAddressPool(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUOverlayAddressPool
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         

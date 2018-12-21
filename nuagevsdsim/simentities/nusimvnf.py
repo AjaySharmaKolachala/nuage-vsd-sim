@@ -39,16 +39,16 @@ class NUSimVNF(NUSimResource):
     """ Represents a VNF
 
         Notes:
-            Represent a VNF instance
+            Instantiation of a VNF on a specified Network Services Gateway that has the resources to manage a VNF.
     """
 
     __vspk_class__ = vsdk.NUVNF
-    __unique_fields__ = []
-    __mandatory_fields__ = ['VNFDescriptorID', 'NSGatewayID', 'name']
+    __unique_fields__ = ['externalID']
+    __mandatory_fields__ = ['NSGatewayID', 'name']
     __default_fields__ = {
         'isAttachedToDescriptor': True
     }
-    __get_parents__ = ['enterprise']
+    __get_parents__ = ['enterprise', 'nsgateway']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

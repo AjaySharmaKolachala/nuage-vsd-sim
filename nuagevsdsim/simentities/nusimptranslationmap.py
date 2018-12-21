@@ -43,7 +43,7 @@ class NUSimPTranslationMap(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUPTranslationMap
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['mappingType', 'providerAliasIP', 'providerIP']
     __default_fields__ = {
         

@@ -39,7 +39,7 @@ class NUSimL4ServiceGroup(NUSimResource):
     """ Represents a L4ServiceGroup
 
         Notes:
-            L4 Service Group is a set of L4 Services that can be used in ACLs.
+            Service Group is a set of Services that can be used in ACLs.
     """
 
     __vspk_class__ = vsdk.NUL4ServiceGroup
@@ -48,7 +48,7 @@ class NUSimL4ServiceGroup(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['enterprise']
+    __get_parents__ = ['enterprise', 'l4service']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

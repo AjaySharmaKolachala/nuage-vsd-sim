@@ -49,7 +49,7 @@ class NUSimNSGatewayTemplate(NUSimResource):
         'SSHService': 'ENABLED',
         'instanceSSHOverride': 'DISALLOWED'
     }
-    __get_parents__ = ['enterprise', 'me']
+    __get_parents__ = ['enterprise', 'infrastructureaccessprofile', 'me']
     __create_parents__ = ['me']
 
     def __init__(self):

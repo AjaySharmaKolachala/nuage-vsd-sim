@@ -39,11 +39,11 @@ class NUSimWirelessPort(NUSimResource):
     """ Represents a WirelessPort
 
         Notes:
-            Represents a wireless (WiFi) interface configured on a Network Service Gateway (NSG) instance.  The WirelessPort instance may map to a physical WiFi card or a WiFi port.
+            Represents a Wireless (WiFi) interface configured on a Network Service Gateway (NSG) instance. The WirelessPort instance may map to a physical WiFi card or a WiFi port.
     """
 
     __vspk_class__ = vsdk.NUWirelessPort
-    __unique_fields__ = ['name', 'physicalName']
+    __unique_fields__ = ['name', 'physicalName', 'externalID']
     __mandatory_fields__ = ['name', 'physicalName', 'wifiFrequencyBand', 'wifiMode', 'portType', 'countryCode', 'frequencyChannel']
     __default_fields__ = {
         'wifiFrequencyBand': 'FREQ_2_4_GHZ',
@@ -51,7 +51,7 @@ class NUSimWirelessPort(NUSimResource):
         'portType': 'ACCESS',
         'frequencyChannel': 'CH_0'
     }
-    __get_parents__ = ['nsgateway']
+    __get_parents__ = ['autodiscoveredgateway', 'nsgateway']
     __create_parents__ = ['nsgateway']
 
     def __init__(self):

@@ -51,8 +51,8 @@ class NUSimCommand(NUSimResource):
         'status': 'UNKNOWN',
         'override': 'UNSPECIFIED'
     }
-    __get_parents__ = ['nsgateway']
-    __create_parents__ = ['nsgateway']
+    __get_parents__ = ['me', 'nsgateway']
+    __create_parents__ = ['me', 'nsgateway']
 
     def __init__(self):
         super(NUSimCommand, self).__init__()

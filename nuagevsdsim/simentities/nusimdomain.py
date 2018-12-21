@@ -46,6 +46,7 @@ class NUSimDomain(NUSimResource):
     __unique_fields__ = ['domainVLANID', 'externalID']
     __mandatory_fields__ = ['name', 'templateID']
     __default_fields__ = {
+        'FIPIgnoreDefaultRoute': 'DISABLED',
         'FIPUnderlay': False,
         'DPI': 'DISABLED',
         'flowCollectionEnabled': 'INHERITED'

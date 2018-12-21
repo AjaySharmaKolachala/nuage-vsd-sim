@@ -48,7 +48,7 @@ class NUSimProxyARPFilter(NUSimResource):
     __default_fields__ = {
         'IPType': 'IPV4'
     }
-    __get_parents__ = ['subnet']
+    __get_parents__ = ['l2domain', 'subnet']
     __create_parents__ = ['subnet']
 
     def __init__(self):

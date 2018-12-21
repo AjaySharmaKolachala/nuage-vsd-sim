@@ -39,7 +39,7 @@ class NUSimLink(NUSimResource):
     """ Represents a Link
 
         Notes:
-            This object represents the link between a source and destination domain in service chaining
+            Border router links provide a way to interconnect VNS domains in the wide-area to datacenter domains. Service chaining links allow domain leaking in order to simplify and enhance capabilities of doing service chaining and traffic steering for NFV and service-provider-grade VPN services.
     """
 
     __vspk_class__ = vsdk.NULink

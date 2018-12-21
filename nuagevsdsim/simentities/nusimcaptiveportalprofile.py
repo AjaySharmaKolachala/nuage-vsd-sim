@@ -48,7 +48,7 @@ class NUSimCaptivePortalProfile(NUSimResource):
     __default_fields__ = {
         'portalType': 'CLICK_THROUGH'
     }
-    __get_parents__ = ['enterprise', 'ssidconnection']
+    __get_parents__ = ['enterprise']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

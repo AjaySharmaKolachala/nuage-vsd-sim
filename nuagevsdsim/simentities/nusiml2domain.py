@@ -48,9 +48,11 @@ class NUSimL2Domain(NUSimResource):
     __default_fields__ = {
         'DPI': 'DISABLED',
         'flowCollectionEnabled': 'INHERITED',
+        'routedVPLSEnabled': False,
+        'useGlobalMAC': 'DISABLED',
         'dynamicIpv6Address': False
     }
-    __get_parents__ = ['enterprise', 'l2domaintemplate', 'me']
+    __get_parents__ = ['enterprise', 'gateway', 'l2domaintemplate', 'me', 'redundancygroup']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

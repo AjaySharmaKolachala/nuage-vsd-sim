@@ -43,12 +43,12 @@ class NUSimApplicationperformancemanagement(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUApplicationperformancemanagement
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'readOnly': False
     }
-    __get_parents__ = ['enterprise', 'performancemonitor', 'vport']
+    __get_parents__ = ['enterprise', 'me', 'performancemonitor']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

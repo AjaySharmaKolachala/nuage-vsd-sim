@@ -138,6 +138,18 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/allalarms'
         )
         self.api.add_resource(
+            sim.NUSimAllGateway,
+            '/nuage/api/v5_0/allgateways',
+            '/nuage/api/v5_0/allgateways/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/allgateways'
+        )
+        self.api.add_resource(
+            sim.NUSimAllRedundancyGroup,
+            '/nuage/api/v5_0/allredundancygroups',
+            '/nuage/api/v5_0/allredundancygroups/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/allredundancygroups'
+        )
+        self.api.add_resource(
             sim.NUSimApplicationBinding,
             '/nuage/api/v5_0/applicationbindings',
             '/nuage/api/v5_0/applicationbindings/<entity_id>',
@@ -342,6 +354,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/demarcationservices'
         )
         self.api.add_resource(
+            sim.NUSimDeploymentFailure,
+            '/nuage/api/v5_0/deploymentfailures',
+            '/nuage/api/v5_0/deploymentfailures/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/deploymentfailures'
+        )
+        self.api.add_resource(
             sim.NUSimDestinationurl,
             '/nuage/api/v5_0/destinationurls',
             '/nuage/api/v5_0/destinationurls/<entity_id>',
@@ -450,16 +468,10 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/egressdomainfloatingipacltemplates'
         )
         self.api.add_resource(
-            sim.NUSimFloatingIPACLTemplateEntry,
-            '/nuage/api/v5_0/egressfloatingipaclentrytemplates',
-            '/nuage/api/v5_0/egressfloatingipaclentrytemplates/<entity_id>',
-            '/nuage/api/v5_0/<parent_type>/<parent_id>/egressfloatingipaclentrytemplates'
-        )
-        self.api.add_resource(
-            sim.NUSimFloatingIPACLTemplate,
-            '/nuage/api/v5_0/egressfloatingipacltemplates',
-            '/nuage/api/v5_0/egressfloatingipacltemplates/<entity_id>',
-            '/nuage/api/v5_0/<parent_type>/<parent_id>/egressfloatingipacltemplates'
+            sim.NUSimEgressProfile,
+            '/nuage/api/v5_0/egressprofiles',
+            '/nuage/api/v5_0/egressprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/egressprofiles'
         )
         self.api.add_resource(
             sim.NUSimEgressQOSPolicy,
@@ -528,6 +540,24 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/floatingips'
         )
         self.api.add_resource(
+            sim.NUSimForwardingPathListEntry,
+            '/nuage/api/v5_0/forwardingpathlistentries',
+            '/nuage/api/v5_0/forwardingpathlistentries/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/forwardingpathlistentries'
+        )
+        self.api.add_resource(
+            sim.NUSimForwardingPathList,
+            '/nuage/api/v5_0/forwardingpathlists',
+            '/nuage/api/v5_0/forwardingpathlists/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/forwardingpathlists'
+        )
+        self.api.add_resource(
+            sim.NUSimGatewayRedundantPort,
+            '/nuage/api/v5_0/gatewayredundantports',
+            '/nuage/api/v5_0/gatewayredundantports/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/gatewayredundantports'
+        )
+        self.api.add_resource(
             sim.NUSimGateway,
             '/nuage/api/v5_0/gateways',
             '/nuage/api/v5_0/gateways/<entity_id>',
@@ -544,6 +574,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/gatewaysecurities',
             '/nuage/api/v5_0/gatewaysecurities/<entity_id>',
             '/nuage/api/v5_0/<parent_type>/<parent_id>/gatewaysecurities'
+        )
+        self.api.add_resource(
+            sim.NUSimGatewaysLocation,
+            '/nuage/api/v5_0/gatewayslocations',
+            '/nuage/api/v5_0/gatewayslocations/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/gatewayslocations'
         )
         self.api.add_resource(
             sim.NUSimGatewayTemplate,
@@ -642,6 +678,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/infrastructureaccessprofiles'
         )
         self.api.add_resource(
+            sim.NUSimInfrastructureEVDFProfile,
+            '/nuage/api/v5_0/infrastructureevdfprofiles',
+            '/nuage/api/v5_0/infrastructureevdfprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/infrastructureevdfprofiles'
+        )
+        self.api.add_resource(
             sim.NUSimInfrastructureGatewayProfile,
             '/nuage/api/v5_0/infrastructuregatewayprofiles',
             '/nuage/api/v5_0/infrastructuregatewayprofiles/<entity_id>',
@@ -678,16 +720,10 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/ingressadvfwdtemplates'
         )
         self.api.add_resource(
-            sim.NUSimIngressExternalServiceTemplateEntry,
-            '/nuage/api/v5_0/ingressexternalserviceentrytemplates',
-            '/nuage/api/v5_0/ingressexternalserviceentrytemplates/<entity_id>',
-            '/nuage/api/v5_0/<parent_type>/<parent_id>/ingressexternalserviceentrytemplates'
-        )
-        self.api.add_resource(
-            sim.NUSimIngressExternalServiceTemplate,
-            '/nuage/api/v5_0/ingressexternalservicetemplates',
-            '/nuage/api/v5_0/ingressexternalservicetemplates/<entity_id>',
-            '/nuage/api/v5_0/<parent_type>/<parent_id>/ingressexternalservicetemplates'
+            sim.NUSimIngressProfile,
+            '/nuage/api/v5_0/ingressprofiles',
+            '/nuage/api/v5_0/ingressprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/ingressprofiles'
         )
         self.api.add_resource(
             sim.NUSimIngressQOSPolicy,
@@ -696,10 +732,22 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/ingressqospolicies'
         )
         self.api.add_resource(
+            sim.NUSimIPFilterProfile,
+            '/nuage/api/v5_0/ipfilterprofiles',
+            '/nuage/api/v5_0/ipfilterprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/ipfilterprofiles'
+        )
+        self.api.add_resource(
             sim.NUSimIPReservation,
             '/nuage/api/v5_0/ipreservations',
             '/nuage/api/v5_0/ipreservations/<entity_id>',
             '/nuage/api/v5_0/<parent_type>/<parent_id>/ipreservations'
+        )
+        self.api.add_resource(
+            sim.NUSimIPv6FilterProfile,
+            '/nuage/api/v5_0/ipv6filterprofiles',
+            '/nuage/api/v5_0/ipv6filterprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/ipv6filterprofiles'
         )
         self.api.add_resource(
             sim.NUSimJob,
@@ -810,6 +858,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/ltestatistics'
         )
         self.api.add_resource(
+            sim.NUSimMACFilterProfile,
+            '/nuage/api/v5_0/macfilterprofiles',
+            '/nuage/api/v5_0/macfilterprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/macfilterprofiles'
+        )
+        self.api.add_resource(
             sim.NUSimMe,
             '/nuage/api/v5_0/me'
         )
@@ -868,6 +922,24 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/natmapentries'
         )
         self.api.add_resource(
+            sim.NUSimNetconfManager,
+            '/nuage/api/v5_0/netconfmanagers',
+            '/nuage/api/v5_0/netconfmanagers/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/netconfmanagers'
+        )
+        self.api.add_resource(
+            sim.NUSimNetconfProfile,
+            '/nuage/api/v5_0/netconfprofiles',
+            '/nuage/api/v5_0/netconfprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/netconfprofiles'
+        )
+        self.api.add_resource(
+            sim.NUSimNetconfSession,
+            '/nuage/api/v5_0/netconfsessions',
+            '/nuage/api/v5_0/netconfsessions/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/netconfsessions'
+        )
+        self.api.add_resource(
             sim.NUSimNetworkLayout,
             '/nuage/api/v5_0/networklayout',
             '/nuage/api/v5_0/networklayout/<entity_id>',
@@ -902,6 +974,18 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/nsgateways',
             '/nuage/api/v5_0/nsgateways/<entity_id>',
             '/nuage/api/v5_0/<parent_type>/<parent_id>/nsgateways'
+        )
+        self.api.add_resource(
+            sim.NUSimNSGatewaysCount,
+            '/nuage/api/v5_0/nsgatewayscounts',
+            '/nuage/api/v5_0/nsgatewayscounts/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/nsgatewayscounts'
+        )
+        self.api.add_resource(
+            sim.NUSimNSGatewaySummary,
+            '/nuage/api/v5_0/nsgatewayssummaries',
+            '/nuage/api/v5_0/nsgatewayssummaries/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/nsgatewayssummaries'
         )
         self.api.add_resource(
             sim.NUSimNSGatewayTemplate,
@@ -1006,6 +1090,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/overlaypatnatentries'
         )
         self.api.add_resource(
+            sim.NUSimPatch,
+            '/nuage/api/v5_0/patches',
+            '/nuage/api/v5_0/patches/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/patches'
+        )
+        self.api.add_resource(
             sim.NUSimPATIPEntry,
             '/nuage/api/v5_0/patipentries',
             '/nuage/api/v5_0/patipentries/<entity_id>',
@@ -1058,6 +1148,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/policyentries',
             '/nuage/api/v5_0/policyentries/<entity_id>',
             '/nuage/api/v5_0/<parent_type>/<parent_id>/policyentries'
+        )
+        self.api.add_resource(
+            sim.NUSimPolicyGroupCategory,
+            '/nuage/api/v5_0/policygroupcategories',
+            '/nuage/api/v5_0/policygroupcategories/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/policygroupcategories'
         )
         self.api.add_resource(
             sim.NUSimPolicyGroup,
@@ -1180,6 +1276,30 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/<parent_type>/<parent_id>/routingpolicies'
         )
         self.api.add_resource(
+            sim.NUSimSaaSApplicationGroup,
+            '/nuage/api/v5_0/saasapplicationgroups',
+            '/nuage/api/v5_0/saasapplicationgroups/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/saasapplicationgroups'
+        )
+        self.api.add_resource(
+            sim.NUSimSaaSApplicationType,
+            '/nuage/api/v5_0/saasapplicationtypes',
+            '/nuage/api/v5_0/saasapplicationtypes/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/saasapplicationtypes'
+        )
+        self.api.add_resource(
+            sim.NUSimSAPEgressQoSProfile,
+            '/nuage/api/v5_0/sapegressqosprofiles',
+            '/nuage/api/v5_0/sapegressqosprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/sapegressqosprofiles'
+        )
+        self.api.add_resource(
+            sim.NUSimSAPIngressQoSProfile,
+            '/nuage/api/v5_0/sapingressqosprofiles',
+            '/nuage/api/v5_0/sapingressqosprofiles/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/sapingressqosprofiles'
+        )
+        self.api.add_resource(
             sim.NUSimWANService,
             '/nuage/api/v5_0/services',
             '/nuage/api/v5_0/services/<entity_id>',
@@ -1190,6 +1310,12 @@ class NuageVSDSim(object):
             '/nuage/api/v5_0/sharednetworkresources',
             '/nuage/api/v5_0/sharednetworkresources/<entity_id>',
             '/nuage/api/v5_0/<parent_type>/<parent_id>/sharednetworkresources'
+        )
+        self.api.add_resource(
+            sim.NUSimShuntLink,
+            '/nuage/api/v5_0/shuntlinks',
+            '/nuage/api/v5_0/shuntlinks/<entity_id>',
+            '/nuage/api/v5_0/<parent_type>/<parent_id>/shuntlinks'
         )
         self.api.add_resource(
             sim.NUSimSiteInfo,

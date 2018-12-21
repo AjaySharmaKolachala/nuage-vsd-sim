@@ -43,10 +43,12 @@ class NUSimBRConnection(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUBRConnection
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
-        
+        'addressFamily': 'IPV4',
+        'advertisementCriteria': 'OPERATIONAL_LINK',
+        'inherited': False
     }
     __get_parents__ = ['vlan', 'vlantemplate']
     __create_parents__ = ['vlan', 'vlantemplate']

@@ -43,7 +43,7 @@ class NUSimNetworkPerformanceBinding(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUNetworkPerformanceBinding
-    __unique_fields__ = ['priority']
+    __unique_fields__ = ['priority', 'externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         'readOnly': False

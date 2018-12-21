@@ -39,7 +39,7 @@ class NUSimPermission(NUSimResource):
     """ Represents a Permission
 
         Notes:
-            Represents  Permitted action on an  entity for a group.
+            User groups that are granted permissions for objects such as domains, zones, and subnets can see and manipulate everything within the object.
     """
 
     __vspk_class__ = vsdk.NUPermission
@@ -48,8 +48,8 @@ class NUSimPermission(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['domain', 'domaintemplate', 'gateway', 'l2domain', 'l2domaintemplate', 'nsgateway', 'nsport', 'port', 'redundancygroup', 'service', 'vlan', 'vsgredundantport', 'zone']
-    __create_parents__ = ['domain', 'domaintemplate', 'gateway', 'l2domain', 'l2domaintemplate', 'nsgateway', 'nsport', 'port', 'redundancygroup', 'service', 'vlan', 'vsgredundantport', 'zone']
+    __get_parents__ = ['domain', 'domaintemplate', 'gateway', 'l2domain', 'l2domaintemplate', 'nsgateway', 'nsgredundancygroup', 'nsport', 'nsredundantport', 'port', 'redundancygroup', 'service', 'vlan', 'vsgredundantport', 'zone']
+    __create_parents__ = ['domain', 'domaintemplate', 'gateway', 'l2domain', 'l2domaintemplate', 'nsgateway', 'nsgredundancygroup', 'nsport', 'nsredundantport', 'port', 'redundancygroup', 'service', 'vlan', 'vsgredundantport', 'zone']
 
     def __init__(self):
         super(NUSimPermission, self).__init__()

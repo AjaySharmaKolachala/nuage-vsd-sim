@@ -39,14 +39,15 @@ class NUSimBGPNeighbor(NUSimResource):
     """ Represents a BGPNeighbor
 
         Notes:
-            None
+            Virtual Cloud Services (VCS) in the data center BGP PE-CE is configured at vport level . Network Service Gateways (NSG) BGP is configured at subnet level.
     """
 
     __vspk_class__ = vsdk.NUBGPNeighbor
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name', 'peerAS']
     __default_fields__ = {
-        'BFDEnabled': False
+        'BFDEnabled': False,
+        'IPType': 'IPV4'
     }
     __get_parents__ = ['me', 'subnet', 'vlan', 'vport']
     __create_parents__ = ['subnet', 'vlan', 'vport']

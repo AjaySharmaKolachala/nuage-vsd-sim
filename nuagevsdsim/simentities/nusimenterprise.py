@@ -47,7 +47,8 @@ class NUSimEnterprise(NUSimResource):
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'VNFManagementEnabled': False,
-        'dictionaryVersion': 1,
+        'dictionaryVersion': 2,
+        'virtualFirewallRulesEnabled': False,
         'flowCollectionEnabled': 'DISABLED',
         'enableApplicationPerformanceManagement': False
     }

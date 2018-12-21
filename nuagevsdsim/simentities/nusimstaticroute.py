@@ -48,8 +48,8 @@ class NUSimStaticRoute(NUSimResource):
     __default_fields__ = {
         'BFDEnabled': False
     }
-    __get_parents__ = ['containerinterface', 'domain', 'hostinterface', 'me', 'sharednetworkresource', 'vminterface']
-    __create_parents__ = ['domain', 'sharednetworkresource']
+    __get_parents__ = ['containerinterface', 'domain', 'hostinterface', 'l2domain', 'me', 'sharednetworkresource', 'vminterface']
+    __create_parents__ = ['domain', 'l2domain', 'sharednetworkresource']
 
     def __init__(self):
         super(NUSimStaticRoute, self).__init__()

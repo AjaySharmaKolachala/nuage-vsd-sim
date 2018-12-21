@@ -39,16 +39,16 @@ class NUSimEgressAdvFwdEntryTemplate(NUSimResource):
     """ Represents a EgressAdvFwdEntryTemplate
 
         Notes:
-            Defines the template of Egress Advanced Forwarding entries
+            Egress forwarding policy rules define what action to take for a particular type of traffic, based on its origin, destination, protocol, EtherType, ports, DSCP value and other information. Supported actions are to redirect traffic, change the forwarding class of the traffic or to allow traffic to pass untouched.
     """
 
     __vspk_class__ = vsdk.NUEgressAdvFwdEntryTemplate
     __unique_fields__ = ['externalID']
-    __mandatory_fields__ = ['ACLTemplateName', 'DSCP', 'name', 'action', 'locationType', 'etherType']
+    __mandatory_fields__ = ['ACLTemplateName', 'DSCP', 'action', 'locationType', 'etherType']
     __default_fields__ = {
         'failsafeDatapath': 'FAIL_TO_BLOCK'
     }
-    __get_parents__ = ['egressadvfwdtemplate']
+    __get_parents__ = ['egressadvfwdtemplate', 'me']
     __create_parents__ = ['egressadvfwdtemplate']
 
     def __init__(self):

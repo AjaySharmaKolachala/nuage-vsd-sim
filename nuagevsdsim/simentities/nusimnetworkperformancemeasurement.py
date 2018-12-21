@@ -43,13 +43,13 @@ class NUSimNetworkPerformanceMeasurement(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUNetworkPerformanceMeasurement
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'NPMType': 'NONE',
         'readOnly': False
     }
-    __get_parents__ = ['enterprise']
+    __get_parents__ = ['enterprise', 'me']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

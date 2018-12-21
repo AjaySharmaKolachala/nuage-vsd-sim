@@ -54,7 +54,7 @@ class NUSimVirtualFirewallPolicy(NUSimResource):
         'autoGeneratePriority': False
     }
     __get_parents__ = ['domain', 'domaintemplate', 'l2domain', 'l2domaintemplate', 'me']
-    __create_parents__ = ['domain', 'domaintemplate', 'l2domain', 'l2domaintemplate', 'me']
+    __create_parents__ = ['domain', 'domaintemplate', 'l2domain', 'l2domaintemplate']
 
     def __init__(self):
         super(NUSimVirtualFirewallPolicy, self).__init__()

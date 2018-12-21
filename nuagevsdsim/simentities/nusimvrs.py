@@ -48,7 +48,7 @@ class NUSimVRS(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['container', 'hsc', 'vm', 'vport', 'vsc']
+    __get_parents__ = ['container', 'hsc', 'me', 'vm', 'vport', 'vsc']
     __create_parents__ = []
 
     def __init__(self):

@@ -46,7 +46,7 @@ class NUSimRoutingPolicy(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name', 'defaultAction']
     __default_fields__ = {
-        
+        'routingProtocol': 'ROUTING'
     }
     __get_parents__ = ['domain', 'enterprise', 'me']
     __create_parents__ = ['domain', 'enterprise']

@@ -39,14 +39,14 @@ class NUSimNetworkMacroGroup(NUSimResource):
     """ Represents a NetworkMacroGroup
 
         Notes:
-            Administrators of an enterprise can define macros that are set of IP addresses that identify enterprise networks. These macros can be used in the ACL definitions by network designers and other users to identify access restrictions towards specific enterprise networks.
+            Network Macro Groups are a collection of existing Network Macros. These groups can be used in Security Policies in order to create rules that matches multiple Network Macros.
     """
 
     __vspk_class__ = vsdk.NUNetworkMacroGroup
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
-        
+        'isSaaSType': False
     }
     __get_parents__ = ['enterprise', 'enterprisenetwork']
     __create_parents__ = ['enterprise']

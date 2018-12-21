@@ -46,9 +46,10 @@ class NUSimGateway(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
-        
+        'ZFBMatchAttribute': 'NONE',
+        'gatewayConnected': False
     }
-    __get_parents__ = ['enterprise', 'me', 'redundancygroup']
+    __get_parents__ = ['enterprise', 'l2domain', 'me', 'redundancygroup']
     __create_parents__ = ['enterprise', 'me']
 
     def __init__(self):

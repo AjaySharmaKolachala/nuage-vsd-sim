@@ -39,7 +39,7 @@ class NUSimDSCPForwardingClassTable(NUSimResource):
     """ Represents a DSCPForwardingClassTable
 
         Notes:
-            Provides the definition of a table that holds multiple DSCP to Forwarding class mappings. Used in QoS policies.
+            DSCP Mapping Tables define a list of mappings from customer's DSCP markings to Forwarding Classes. They can be referenced in QoS policies.
     """
 
     __vspk_class__ = vsdk.NUDSCPForwardingClassTable

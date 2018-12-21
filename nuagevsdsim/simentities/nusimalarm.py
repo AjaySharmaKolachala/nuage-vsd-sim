@@ -48,8 +48,8 @@ class NUSimAlarm(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['container', 'enterprise', 'gateway', 'hsc', 'ikegatewayconnection', 'nsgateway', 'nsgredundancygroup', 'nsport', 'port', 'redundancygroup', 'service', 'ssidconnection', 'tca', 'vlan', 'vm', 'vport', 'vrs', 'vsc', 'vsd', 'vsgredundantport', 'wirelessport']
-    __create_parents__ = ['ikegatewayconnection', 'tca']
+    __get_parents__ = ['container', 'domain', 'enterprise', 'gateway', 'hsc', 'ikegatewayconnection', 'l2domain', 'nsgateway', 'nsgredundancygroup', 'nsport', 'port', 'redundancygroup', 'service', 'shuntlink', 'ssidconnection', 'tca', 'vlan', 'vm', 'vport', 'vrs', 'vsc', 'vsd', 'vsgredundantport', 'wirelessport']
+    __create_parents__ = ['tca']
 
     def __init__(self):
         super(NUSimAlarm, self).__init__()

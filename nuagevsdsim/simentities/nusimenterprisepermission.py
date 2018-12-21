@@ -48,8 +48,8 @@ class NUSimEnterprisePermission(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['gateway', 'nsgateway', 'nsport', 'patnatpool', 'port', 'redundancygroup', 'service', 'sharednetworkresource', 'subnet', 'vlan', 'vsgredundantport']
-    __create_parents__ = ['gateway', 'nsport', 'patnatpool', 'port', 'redundancygroup', 'service', 'sharednetworkresource', 'subnet', 'vlan', 'vsgredundantport']
+    __get_parents__ = ['gateway', 'nsgateway', 'nsgredundancygroup', 'nsport', 'nsredundantport', 'patnatpool', 'port', 'redundancygroup', 'service', 'sharednetworkresource', 'subnet', 'vlan', 'vsgredundantport']
+    __create_parents__ = ['gateway', 'nsgateway', 'nsgredundancygroup', 'nsport', 'nsredundantport', 'patnatpool', 'port', 'redundancygroup', 'service', 'sharednetworkresource', 'subnet', 'vlan', 'vsgredundantport']
 
     def __init__(self):
         super(NUSimEnterprisePermission, self).__init__()

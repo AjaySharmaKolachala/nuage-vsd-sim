@@ -39,7 +39,7 @@ class NUSimRateLimiter(NUSimResource):
     """ Represents a RateLimiter
 
         Notes:
-            Rate Limiter object that contains peak, burst and cir. It can be associated with Egress QOS policy objects.
+            Set of traffic management parameters describing a desired traffic profile. Rate-limiters are used by QoS policies to enforce per Class of Server rate-conformance.
     """
 
     __vspk_class__ = vsdk.NURateLimiter

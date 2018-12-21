@@ -39,11 +39,11 @@ class NUSimVNFDescriptor(NUSimResource):
     """ Represents a VNFDescriptor
 
         Notes:
-            Represent Virtual Network Function Descriptor Object
+            The behavioral and deployment information of a VNF is defined in the VNF descriptor template. The template is based on the libvirt domain XML and is on-boarded in a VNF catalog. The resource requirements for CPU, memory and storage are defined in this screen and the rest of the template is inherited from the VNF Metadata object.
     """
 
     __vspk_class__ = vsdk.NUVNFDescriptor
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name', 'memoryMB', 'metadataID', 'storageGB']
     __default_fields__ = {
         'visible': True,

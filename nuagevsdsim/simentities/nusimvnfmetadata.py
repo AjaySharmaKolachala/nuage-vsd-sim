@@ -39,11 +39,11 @@ class NUSimVNFMetadata(NUSimResource):
     """ Represents a VNFMetadata
 
         Notes:
-            None
+            The VNF deployment properties that includes the location of the image, bootstrap config and rest of the libvirt domain XML template defined as text file.
     """
 
     __vspk_class__ = vsdk.NUVNFMetadata
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name', 'blob']
     __default_fields__ = {
         

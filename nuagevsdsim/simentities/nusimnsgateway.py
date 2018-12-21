@@ -39,7 +39,7 @@ class NUSimNSGateway(NUSimResource):
     """ Represents a NSGateway
 
         Notes:
-            Represents a Network Service Gateway.
+            Network Services Gateways are a policy enforcement end-points responsible for the delivery of networking services. NSG access ports/VLANs may be attached to existing host or bridge VPorts.
     """
 
     __vspk_class__ = vsdk.NUNSGateway
@@ -48,17 +48,20 @@ class NUSimNSGateway(NUSimResource):
     __default_fields__ = {
         'TCPMSSEnabled': False,
         'TCPMaximumSegmentSize': 1330,
+        'ZFBMatchAttribute': 'NONE',
         'TPMStatus': 'UNKNOWN',
         'SSHService': 'INHERITED',
         'lastConfigurationReloadTimestamp': -1,
+        'gatewayConnected': False,
+        'networkAcceleration': 'NONE',
         'inheritedSSHServiceState': 'ENABLED',
         'configurationReloadState': 'UNKNOWN',
         'configurationStatus': 'UNKNOWN',
         'controlTrafficCOSValue': 7,
         'controlTrafficDSCPValue': 56
     }
-    __get_parents__ = ['ducgroup', 'enterprise', 'me', 'nsggroup', 'nsgredundancygroup', 'performancemonitor', 'policyobjectgroup']
-    __create_parents__ = ['enterprise']
+    __get_parents__ = ['ducgroup', 'enterprise', 'me', 'nsggroup', 'nsgredundancygroup', 'policyobjectgroup']
+    __create_parents__ = ['ducgroup', 'enterprise', 'me']
 
     def __init__(self):
         super(NUSimNSGateway, self).__init__()

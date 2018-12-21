@@ -29,27 +29,27 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-NUSimIngressExternalServiceTemplateEntry
+NUSimPolicyGroupCategory
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-class NUSimIngressExternalServiceTemplateEntry(NUSimResource):
-    """ Represents a IngressExternalServiceTemplateEntry
+class NUSimPolicyGroupCategory(NUSimResource):
+    """ Represents a PolicyGroupCategory
 
         Notes:
-            Defines the template of Ingress External Service ACL entries
+            Policy Group Categories are used to group Policy Group tags of similar type (e.g., Application, App-Tier, Location etc.) to provide additional context for flow visualization and analytics
     """
 
-    __vspk_class__ = vsdk.NUIngressExternalServiceTemplateEntry
+    __vspk_class__ = vsdk.NUPolicyGroupCategory
     __unique_fields__ = ['externalID']
-    __mandatory_fields__ = ['ACLTemplateName', 'DSCP', 'name', 'action', 'enterpriseName', 'locationType', 'domainName', 'etherType']
+    __mandatory_fields__ = ['name']
     __default_fields__ = {
-        
+        'defaultCategory': False
     }
-    __get_parents__ = ['ingressexternalservicetemplate']
-    __create_parents__ = ['ingressexternalservicetemplate']
+    __get_parents__ = ['enterprise', 'policygroup']
+    __create_parents__ = ['enterprise']
 
     def __init__(self):
-        super(NUSimIngressExternalServiceTemplateEntry, self).__init__()
+        super(NUSimPolicyGroupCategory, self).__init__()

@@ -39,16 +39,16 @@ class NUSimSSIDConnection(NUSimResource):
     """ Represents a SSIDConnection
 
         Notes:
-            An SSID Connection instance represents an SSID defined on a WiFi interface.  One SSID Connection is required per SSID created on a WiFi Card/Port.
+            An SSID Connection instance represents an SSID defined on a WiFi interface. One SSID Connection is required per SSID created on a WiFi Card/Port.
     """
 
     __vspk_class__ = vsdk.NUSSIDConnection
-    __unique_fields__ = ['name', 'interfaceName']
+    __unique_fields__ = ['name', 'interfaceName', 'externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'redirectOption': 'ORIGINAL_REQUEST',
         'broadcastSSID': True,
-        'authenticationMode': 'OPEN'
+        'authenticationMode': 'WPA2'
     }
     __get_parents__ = ['wirelessport']
     __create_parents__ = ['wirelessport']

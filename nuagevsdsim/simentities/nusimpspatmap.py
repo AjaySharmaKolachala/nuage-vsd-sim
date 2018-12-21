@@ -43,7 +43,7 @@ class NUSimPSPATMap(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUPSPATMap
-    __unique_fields__ = ['name']
+    __unique_fields__ = ['name', 'externalID']
     __mandatory_fields__ = ['name', 'reservedSPATIPs', 'associatedSPATSourcesPoolID']
     __default_fields__ = {
         

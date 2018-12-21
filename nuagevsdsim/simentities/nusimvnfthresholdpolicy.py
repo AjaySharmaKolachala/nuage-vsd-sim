@@ -39,11 +39,11 @@ class NUSimVNFThresholdPolicy(NUSimResource):
     """ Represents a VNFThresholdPolicy
 
         Notes:
-            Represents thresholds for resources consumed by VNF instance running on NS Gateway and action to be taken when resource utilization crosses configured thresholds.
+            VNF Threshold Policy represents thresholds for resources consumed by VNF instance running on NS Gateway and action to be taken when resource utilization crosses configured thresholds.
     """
 
     __vspk_class__ = vsdk.NUVNFThresholdPolicy
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
         'CPUThreshold': 80,
@@ -53,7 +53,7 @@ class NUSimVNFThresholdPolicy(NUSimResource):
         'monitInterval': 10,
         'storageThreshold': 80
     }
-    __get_parents__ = ['enterprise', 'me']
+    __get_parents__ = ['enterprise', 'me', 'vnf']
     __create_parents__ = ['enterprise', 'me']
 
     def __init__(self):

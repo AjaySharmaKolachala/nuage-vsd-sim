@@ -49,7 +49,7 @@ class NUSimIngressACLEntryTemplate(NUSimResource):
         
     }
     __get_parents__ = ['domain', 'ingressacltemplate', 'l2domain', 'me', 'mirrordestination', 'vport']
-    __create_parents__ = ['domain', 'ingressacltemplate', 'l2domain', 'me']
+    __create_parents__ = ['ingressacltemplate']
 
     def __init__(self):
         super(NUSimIngressACLEntryTemplate, self).__init__()

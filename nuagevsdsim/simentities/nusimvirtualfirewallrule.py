@@ -46,11 +46,13 @@ class NUSimVirtualFirewallRule(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['action', 'locationType']
     __default_fields__ = {
+        'action': 'FORWARD',
         'networkType': 'ANY',
         'flowLoggingEnabled': False,
+        'stateful': False,
         'statsLoggingEnabled': False
     }
-    __get_parents__ = ['virtualfirewallpolicy']
+    __get_parents__ = ['domain', 'l2domain', 'me', 'virtualfirewallpolicy']
     __create_parents__ = ['virtualfirewallpolicy']
 
     def __init__(self):

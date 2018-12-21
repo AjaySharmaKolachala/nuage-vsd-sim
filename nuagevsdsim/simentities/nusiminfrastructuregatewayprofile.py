@@ -39,7 +39,7 @@ class NUSimInfrastructureGatewayProfile(NUSimResource):
     """ Represents a InfrastructureGatewayProfile
 
         Notes:
-            Represents Infrastructure Gateway Profile instance.  This object contains the common parameters for different types of NSGs to perform bootstrapping and have their network infrastructure and services configured before becoming operational.
+            Infrastructure Gateway Profiles are gateway-level platform attributes inherited by gateways as they are instantiated, connecting them to Nuage management infrastructure.
     """
 
     __vspk_class__ = vsdk.NUInfrastructureGatewayProfile

@@ -47,13 +47,16 @@ class NUSimVCenterHypervisor(NUSimResource):
     __mandatory_fields__ = ['name', 'dataNetworkPortgroup', 'secondaryDataUplinkEnabled', 'description', 'revertiveControllerEnabled', 'revertiveTimer', 'mgmtNetworkPortgroup', 'vmNetworkPortgroup', 'hypervisorIP', 'hypervisorPassword', 'hypervisorUser']
     __default_fields__ = {
         'VRSState': 'NOT_DEPLOYED',
+        'manageVRSAvailability': False,
         'secondaryDataUplinkDHCPEnabled': False,
         'secondaryDataUplinkEnabled': False,
         'secondaryDataUplinkMTU': 1500,
         'secondaryDataUplinkUnderlayID': 1,
+        'secondaryDataUplinkVDFControlVLAN': 0,
         'memorySizeInGB': 'DEFAULT_4',
         'remoteSyslogServerPort': 514,
         'remoteSyslogServerType': 'NONE',
+        'personality': 'VRS',
         'destinationMirrorPort': 'no_mirror',
         'revertiveControllerEnabled': False,
         'revertiveTimer': 300,
@@ -63,6 +66,8 @@ class NUSimVCenterHypervisor(NUSimResource):
         'configuredMetricsPushInterval': 60,
         'cpuCount': 'DEFAULT_2',
         'primaryDataUplinkUnderlayID': 0,
+        'primaryDataUplinkVDFControlVLAN': 0,
+        'vrsMarkedAsAvailable': False,
         'avrsEnabled': False,
         'avrsProfile': 'AVRS_25G'
     }

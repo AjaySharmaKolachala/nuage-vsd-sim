@@ -50,7 +50,6 @@ class NUSimSubnet(NUSimResource):
         'accessRestrictionEnabled': False,
         'advertise': True,
         'resourceType': 'STANDARD',
-        'flowCollectionEnabled': 'INHERITED',
         'multiHomeEnabled': False,
         'dynamicIpv6Address': False
     }

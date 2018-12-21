@@ -46,11 +46,12 @@ class NUSimVLAN(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['value']
     __default_fields__ = {
+        'shuntVLAN': False,
         'isUplink': False,
         'ducVlan': False
     }
-    __get_parents__ = ['nsport', 'nsredundantport', 'port', 'vsgredundantport']
-    __create_parents__ = ['nsport', 'nsredundantport', 'port', 'vsgredundantport']
+    __get_parents__ = ['gatewayredundantport', 'nsport', 'nsredundantport', 'port', 'vsgredundantport']
+    __create_parents__ = ['gatewayredundantport', 'nsport', 'nsredundantport', 'port', 'vsgredundantport']
 
     def __init__(self):
         super(NUSimVLAN, self).__init__()

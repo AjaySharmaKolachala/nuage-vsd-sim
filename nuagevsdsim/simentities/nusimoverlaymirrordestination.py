@@ -46,9 +46,9 @@ class NUSimOverlayMirrorDestination(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['endPointType']
     __default_fields__ = {
-        
+        'endPointType': 'NONE'
     }
-    __get_parents__ = ['l2domain']
+    __get_parents__ = ['l2domain', 'me']
     __create_parents__ = ['l2domain']
 
     def __init__(self):

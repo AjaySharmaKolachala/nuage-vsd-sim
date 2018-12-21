@@ -43,7 +43,7 @@ class NUSimDUCGroupBinding(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUDUCGroupBinding
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         'oneWayDelay': 50

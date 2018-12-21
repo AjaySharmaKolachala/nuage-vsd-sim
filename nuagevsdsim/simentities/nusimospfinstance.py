@@ -44,7 +44,7 @@ class NUSimOSPFInstance(NUSimResource):
 
     __vspk_class__ = vsdk.NUOSPFInstance
     __unique_fields__ = ['externalID']
-    __mandatory_fields__ = ['name', 'exportLimit']
+    __mandatory_fields__ = ['name']
     __default_fields__ = {
         'preference': 10,
         'superBackboneEnabled': False,

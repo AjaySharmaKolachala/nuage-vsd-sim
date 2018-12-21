@@ -29,27 +29,27 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-NUSimIngressExternalServiceTemplate
+NUSimSAPEgressQoSProfile
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-class NUSimIngressExternalServiceTemplate(NUSimResource):
-    """ Represents a IngressExternalServiceTemplate
+class NUSimSAPEgressQoSProfile(NUSimResource):
+    """ Represents a SAPEgressQoSProfile
 
         Notes:
-            Defines the template for an Ingress External Service Acls.
+            7x50 SAP Egress QoS profile
     """
 
-    __vspk_class__ = vsdk.NUIngressExternalServiceTemplate
+    __vspk_class__ = vsdk.NUSAPEgressQoSProfile
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         
     }
-    __get_parents__ = ['domain', 'domaintemplate', 'l2domain', 'l2domaintemplate']
-    __create_parents__ = ['domain', 'domaintemplate', 'l2domain', 'l2domaintemplate']
+    __get_parents__ = ['gateway', 'redundancygroup']
+    __create_parents__ = []
 
     def __init__(self):
-        super(NUSimIngressExternalServiceTemplate, self).__init__()
+        super(NUSimSAPEgressQoSProfile, self).__init__()

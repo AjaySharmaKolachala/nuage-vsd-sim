@@ -46,12 +46,14 @@ class NUSimNSRedundantGatewayGroup(NUSimResource):
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
+        'gatewayPeer1Connected': False,
+        'gatewayPeer2Connected': False,
         'heartbeatInterval': 500,
         'heartbeatVLANID': 4094,
         'consecutiveFailuresCount': 3
     }
     __get_parents__ = ['enterprise', 'me']
-    __create_parents__ = ['enterprise']
+    __create_parents__ = ['enterprise', 'me']
 
     def __init__(self):
         super(NUSimNSRedundantGatewayGroup, self).__init__()

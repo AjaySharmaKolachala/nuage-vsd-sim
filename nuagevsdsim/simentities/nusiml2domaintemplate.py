@@ -39,7 +39,7 @@ class NUSimL2DomainTemplate(NUSimResource):
     """ Represents a L2DomainTemplate
 
         Notes:
-            L2 Domain in VSD as derived by templates. This object describes the L2 Domain template.
+            An L2 Domain is a distributed logical switch that enables L2 communication. An L2 Domain template is a model that can be instantiated as often as required, thereby creating real, functioning L2 Domains.
     """
 
     __vspk_class__ = vsdk.NUL2DomainTemplate

@@ -49,7 +49,7 @@ class NUSimBootstrapActivation(NUSimResource):
         'tpmState': 0
     }
     __get_parents__ = []
-    __create_parents__ = ['nsgateway']
+    __create_parents__ = ['gateway', 'nsgateway']
 
     def __init__(self):
         super(NUSimBootstrapActivation, self).__init__()

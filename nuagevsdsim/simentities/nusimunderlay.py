@@ -39,7 +39,7 @@ class NUSimUnderlay(NUSimResource):
     """ Represents a Underlay
 
         Notes:
-            None
+            Underlays identify the transport networks that provide connectivity between NSGs, e.g. the Internet or a carrier MPLS VPN. The modelling of an underlay is required when using multiple disjoint underlays that are interconnected via one or more NSG-UBRs. The underlay object is used at the NSG Control uplink and at the NSG-UBR Underlay uplink. If no underlays are defined a default underlay is used.
     """
 
     __vspk_class__ = vsdk.NUUnderlay
@@ -48,7 +48,7 @@ class NUSimUnderlay(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['me', 'uplinkconnection']
+    __get_parents__ = ['me']
     __create_parents__ = ['me']
 
     def __init__(self):

@@ -39,7 +39,7 @@ class NUSimVSD(NUSimResource):
     """ Represents a VSD
 
         Notes:
-            System Monitoring details for VSD.
+            System Monitoring details for VSD. This is deprecated and no longer provided through the Nuage API. This information can now be gathered through the Monit API.
     """
 
     __vspk_class__ = vsdk.NUVSD
@@ -48,7 +48,7 @@ class NUSimVSD(NUSimResource):
     __default_fields__ = {
         
     }
-    __get_parents__ = ['vsp']
+    __get_parents__ = []
     __create_parents__ = []
 
     def __init__(self):

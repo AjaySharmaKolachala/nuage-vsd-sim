@@ -43,13 +43,13 @@ class NUSimApplicationperformancemanagementbinding(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUApplicationperformancemanagementbinding
-    __unique_fields__ = ['priority']
+    __unique_fields__ = ['priority', 'externalID']
     __mandatory_fields__ = ['associatedApplicationPerformanceManagementID']
     __default_fields__ = {
         'readOnly': False
     }
-    __get_parents__ = ['domain']
-    __create_parents__ = ['domain']
+    __get_parents__ = ['applicationperformancemanagement', 'domain', 'l2domain']
+    __create_parents__ = ['domain', 'l2domain']
 
     def __init__(self):
         super(NUSimApplicationperformancemanagementbinding, self).__init__()

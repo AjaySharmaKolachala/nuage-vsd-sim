@@ -29,27 +29,28 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-NUSimFloatingIPACLTemplateEntry
+NUSimPatch
 """
 from vspk import v5_0 as vsdk
 
 from nuagevsdsim.simentities.nusimresource import NUSimResource
 
-class NUSimFloatingIPACLTemplateEntry(NUSimResource):
-    """ Represents a FloatingIPACLTemplateEntry
+class NUSimPatch(NUSimResource):
+    """ Represents a Patch
 
         Notes:
-            Defines the template of Egress ACL Template entries
+            This entity defines a patch installed somewhere (ie. NSG Patch)
     """
 
-    __vspk_class__ = vsdk.NUFloatingIPACLTemplateEntry
+    __vspk_class__ = vsdk.NUPatch
     __unique_fields__ = ['externalID']
-    __mandatory_fields__ = ['ACLTemplateName', 'enterpriseName', 'domainName']
+    __mandatory_fields__ = []
     __default_fields__ = {
-        
+        'supportsDeletion': False,
+        'supportsNetworkAcceleration': False
     }
-    __get_parents__ = ['egressfloatingipacltemplate']
-    __create_parents__ = ['egressfloatingipacltemplate']
+    __get_parents__ = ['nsgateway']
+    __create_parents__ = []
 
     def __init__(self):
-        super(NUSimFloatingIPACLTemplateEntry, self).__init__()
+        super(NUSimPatch, self).__init__()

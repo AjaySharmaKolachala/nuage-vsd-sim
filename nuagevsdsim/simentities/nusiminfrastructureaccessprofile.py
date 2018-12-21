@@ -39,7 +39,7 @@ class NUSimInfrastructureAccessProfile(NUSimResource):
     """ Represents a InfrastructureAccessProfile
 
         Notes:
-            Represents an Infrastructure Access Profile
+            Infrastructure Access Profiles identify a set of NSG template level platform attributes specifically related to user and access control, inherited by gateways as they are instantiated.
     """
 
     __vspk_class__ = vsdk.NUInfrastructureAccessProfile

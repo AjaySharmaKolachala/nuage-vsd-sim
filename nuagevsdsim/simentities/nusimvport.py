@@ -47,10 +47,11 @@ class NUSimVPort(NUSimResource):
     __mandatory_fields__ = ['name', 'addressSpoofing', 'type']
     __default_fields__ = {
         'DPI': 'INHERITED',
-        'flowCollectionEnabled': 'INHERITED',
-        'subType': 'NONE'
+        'accessRestrictionEnabled': False,
+        'subType': 'NONE',
+        'gwEligible': False
     }
-    __get_parents__ = ['domain', 'floatingip', 'l2domain', 'multinicvport', 'overlaymirrordestination', 'policygroup', 'redirectiontarget', 'subnet', 'trunk', 'vrs', 'zone']
+    __get_parents__ = ['domain', 'egressprofile', 'floatingip', 'ingressprofile', 'l2domain', 'multinicvport', 'overlaymirrordestination', 'policygroup', 'redirectiontarget', 'subnet', 'trunk', 'vrs', 'zone']
     __create_parents__ = ['l2domain', 'subnet']
 
     def __init__(self):

@@ -39,7 +39,7 @@ class NUSimQOS(NUSimResource):
     """ Represents a QOS
 
         Notes:
-            The object manipulates the QoS parameters attached to a domain, zone, or subnet.
+            QoS policies enable you to classify and limit network traffic.
     """
 
     __vspk_class__ = vsdk.NUQOS

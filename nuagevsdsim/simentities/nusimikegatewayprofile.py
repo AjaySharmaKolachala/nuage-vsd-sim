@@ -39,7 +39,7 @@ class NUSimIKEGatewayProfile(NUSimResource):
     """ Represents a IKEGatewayProfile
 
         Notes:
-            Represents an IKE Gateway
+            Define attributes of the remote IKE gateway.
     """
 
     __vspk_class__ = vsdk.NUIKEGatewayProfile

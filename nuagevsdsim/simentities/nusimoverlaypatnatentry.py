@@ -43,10 +43,10 @@ class NUSimOverlayPATNATEntry(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUOverlayPATNATEntry
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
-        
+        'NATEnabled': True
     }
     __get_parents__ = ['overlayaddresspool']
     __create_parents__ = ['overlayaddresspool']

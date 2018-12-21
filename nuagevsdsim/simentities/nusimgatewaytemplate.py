@@ -39,7 +39,7 @@ class NUSimGatewayTemplate(NUSimResource):
     """ Represents a GatewayTemplate
 
         Notes:
-            Represents Gateway Template object.
+            A gateway is your point of exit to an external network. It can be a physical or a virtual device. Gateways are templatable. You can attach gateway's VLANs to any existing host or bridge VPorts.
     """
 
     __vspk_class__ = vsdk.NUGatewayTemplate

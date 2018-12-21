@@ -43,8 +43,8 @@ class NUSimConnectionendpoint(NUSimResource):
     """
 
     __vspk_class__ = vsdk.NUConnectionendpoint
-    __unique_fields__ = []
-    __mandatory_fields__ = ['IPAddress', 'name']
+    __unique_fields__ = ['externalID']
+    __mandatory_fields__ = ['name']
     __default_fields__ = {
         'IPType': 'IPV4',
         'endPointType': 'SOURCE'

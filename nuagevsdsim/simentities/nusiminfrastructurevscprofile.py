@@ -39,13 +39,14 @@ class NUSimInfrastructureVscProfile(NUSimResource):
     """ Represents a InfrastructureVscProfile
 
         Notes:
-            Represents an Infrastructure VSC Profile.
+            Infrastructure VSC Profiles identify a set of controllers which will be used to connect bootstrapped NSGs.
     """
 
     __vspk_class__ = vsdk.NUInfrastructureVscProfile
     __unique_fields__ = ['externalID']
     __mandatory_fields__ = ['name']
     __default_fields__ = {
+        'addressFamily': 'IPV4',
         'probeInterval': 5000
     }
     __get_parents__ = ['me']

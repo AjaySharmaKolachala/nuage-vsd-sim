@@ -39,16 +39,16 @@ class NUSimPolicyObjectGroup(NUSimResource):
     """ Represents a PolicyObjectGroup
 
         Notes:
-            None
+            Policy Object Groups are a collection of existing Network Services Gateways. These groups can be used in routing policies for domain links.
     """
 
     __vspk_class__ = vsdk.NUPolicyObjectGroup
-    __unique_fields__ = []
+    __unique_fields__ = ['externalID']
     __mandatory_fields__ = []
     __default_fields__ = {
         
     }
-    __get_parents__ = ['enterprise']
+    __get_parents__ = ['enterprise', 'me']
     __create_parents__ = ['enterprise']
 
     def __init__(self):

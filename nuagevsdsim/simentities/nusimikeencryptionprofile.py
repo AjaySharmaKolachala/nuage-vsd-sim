@@ -53,6 +53,7 @@ class NUSimIKEEncryptionprofile(NUSimResource):
         'IPsecEncryptionAlgorithm': 'AES256',
         'IPsecSALifetime': 3600,
         'IPsecSAReplayWindowSize': 'WINDOW_SIZE_32',
+        'IPsecSAReplayWindowSizeValue': 32,
         'ISAKMPAuthenticationMode': 'PRE_SHARED_KEY',
         'ISAKMPDiffieHelmanGroupIdentifier': 'GROUP_5_1536_BIT_DH',
         'ISAKMPEncryptionAlgorithm': 'AES256',
